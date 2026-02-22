@@ -1,0 +1,341 @@
+--- decoded/smali/com/alensw/ui/c/as.smali
++++ decoded/smali/com/alensw/ui/c/as.smali
+@@ -1506,14 +1506,30 @@
+     if-eq v1, v0, :cond_1
+ 
+     :cond_0
+-    const-string v1, "image/gif"
+-
+     iget-object v2, p0, Lcom/alensw/ui/c/as;->f:Lcom/alensw/ui/view/PictureView;
+ 
+     invoke-virtual {v2}, Lcom/alensw/ui/view/PictureView;->getMimeType()Ljava/lang/String;
+ 
+     move-result-object v2
+ 
++    const-string v1, "image/gif"
++
++    invoke-virtual {v1, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
++
++    move-result v1
++
++    if-nez v1, :cond_1
++
++    const-string v1, "image/webp"
++
++    invoke-virtual {v1, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
++
++    move-result v1
++
++    if-nez v1, :cond_1
++
++    const-string v1, "image/x-webp"
++
+     invoke-virtual {v1, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+ 
+     move-result v1
+--- decoded/smali/com/alensw/ui/c/dp.smali
++++ decoded/smali/com/alensw/ui/c/dp.smali
+@@ -1667,6 +1667,22 @@
+ 
+     move-result v1
+ 
++    if-nez v1, :cond_0
++
++    const-string v1, "image/webp"
++
++    invoke-virtual {v1, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
++
++    move-result v1
++
++    if-nez v1, :cond_0
++
++    const-string v1, "image/x-webp"
++
++    invoke-virtual {v1, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
++
++    move-result v1
++
+     if-eqz v1, :cond_1
+ 
+     :cond_0
+--- decoded/smali/com/alensw/a/at.smali
++++ decoded/smali/com/alensw/a/at.smali
+@@ -840,6 +840,47 @@
+     return-object v0
+ 
+     :cond_1
++    const-string v0, "image/webp"
++
++    iget-object v2, v3, Lcom/alensw/b/h/a;->outMimeType:Ljava/lang/String;
++
++    invoke-virtual {v0, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
++
++    move-result v0
++
++    if-nez v0, :cond_9
++
++    const-string v0, "image/x-webp"
++
++    iget-object v2, v3, Lcom/alensw/b/h/a;->outMimeType:Ljava/lang/String;
++
++    invoke-virtual {v0, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
++
++    move-result v0
++
++    if-eqz v0, :cond_8
++
++    :cond_9
++
++    iget-boolean v0, v3, Lcom/alensw/b/h/a;->mCancel:Z
++
++    if-nez v0, :cond_8
++
++    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
++
++    const/16 v2, 0x1c
++
++    if-lt v0, v2, :cond_8
++
++    iget-object v0, p0, Lcom/alensw/a/at;->d:Landroid/os/Handler;
++
++    invoke-static {p1, p2, v0}, Lcom/alensw/b/h/r;->a(Lcom/alensw/b/c/f;Landroid/net/Uri;Landroid/os/Handler;)Lcom/alensw/b/h/r;
++
++    move-result-object v0
++
++    if-nez v0, :goto_0
++
++    :cond_8
+     const-string v0, "image/gif"
+ 
+     iget-object v2, v3, Lcom/alensw/b/h/a;->outMimeType:Ljava/lang/String;
+--- /dev/null
++++ decoded/smali/com/alensw/b/h/r.smali
+@@ -0,0 +1,228 @@
++.class public Lcom/alensw/b/h/r;
++.super Lcom/alensw/b/h/j;
++
++
++# instance fields
++.field private j:Landroid/graphics/drawable/AnimatedImageDrawable;
++
++.field private k:J
++
++
++# direct methods
++.method public constructor <init>(Landroid/graphics/drawable/AnimatedImageDrawable;Landroid/net/Uri;)V
++    .locals 6
++
++    const/4 v1, 0x1
++
++    const/4 v2, 0x1
++
++    if-eqz p1, :cond_0
++
++    invoke-virtual {p1}, Landroid/graphics/drawable/AnimatedImageDrawable;->getIntrinsicWidth()I
++
++    move-result v0
++
++    invoke-static {v1, v0}, Ljava/lang/Math;->max(II)I
++
++    move-result v1
++
++    invoke-virtual {p1}, Landroid/graphics/drawable/AnimatedImageDrawable;->getIntrinsicHeight()I
++
++    move-result v0
++
++    invoke-static {v2, v0}, Ljava/lang/Math;->max(II)I
++
++    move-result v2
++
++    :cond_0
++    move-object v0, p0
++
++    const/4 v3, 0x4
++
++    move-object v4, p2
++
++    const-string v5, "image/webp"
++
++    invoke-direct/range {v0 .. v5}, Lcom/alensw/b/h/j;-><init>(IIILandroid/net/Uri;Ljava/lang/String;)V
++
++    iput-object p1, p0, Lcom/alensw/b/h/r;->j:Landroid/graphics/drawable/AnimatedImageDrawable;
++
++    const-wide/16 v0, 0x0
++
++    iput-wide v0, p0, Lcom/alensw/b/h/r;->k:J
++
++    if-eqz p1, :cond_1
++
++    iget-object v0, p0, Lcom/alensw/b/h/h;->b:Lcom/alensw/b/h/i;
++
++    iget v1, v0, Lcom/alensw/b/h/i;->a:I
++
++    iget v0, v0, Lcom/alensw/b/h/i;->b:I
++
++    const/4 v2, 0x0
++
++    const/4 v3, 0x0
++
++    invoke-virtual {p1, v2, v3, v1, v0}, Landroid/graphics/drawable/AnimatedImageDrawable;->setBounds(IIII)V
++
++    :cond_1
++    return-void
++.end method
++
++.method public static a(Lcom/alensw/b/c/f;Landroid/net/Uri;Landroid/os/Handler;)Lcom/alensw/b/h/r;
++    .locals 4
++
++    const/4 v0, 0x0
++
++    sget v1, Landroid/os/Build$VERSION;->SDK_INT:I
++
++    const/16 v2, 0x1c
++
++    if-lt v1, v2, :cond_1
++
++    :try_start_0
++    new-instance v1, Ljava/io/File;
++
++    invoke-virtual {p0}, Lcom/alensw/b/c/f;->d()Ljava/lang/String;
++
++    move-result-object v2
++
++    invoke-direct {v1, v2}, Ljava/io/File;-><init>(Ljava/lang/String;)V
++
++    invoke-static {v1}, Landroid/graphics/ImageDecoder;->createSource(Ljava/io/File;)Landroid/graphics/ImageDecoder$Source;
++
++    move-result-object v1
++
++    invoke-static {v1}, Landroid/graphics/ImageDecoder;->decodeDrawable(Landroid/graphics/ImageDecoder$Source;)Landroid/graphics/drawable/Drawable;
++
++    move-result-object v1
++
++    instance-of v2, v1, Landroid/graphics/drawable/AnimatedImageDrawable;
++
++    if-eqz v2, :cond_0
++
++    new-instance v2, Lcom/alensw/b/h/r;
++
++    check-cast v1, Landroid/graphics/drawable/AnimatedImageDrawable;
++
++    invoke-direct {v2, v1, p1}, Lcom/alensw/b/h/r;-><init>(Landroid/graphics/drawable/AnimatedImageDrawable;Landroid/net/Uri;)V
++    :try_end_0
++    .catch Ljava/lang/Throwable; {:try_start_0 .. :try_end_0} :catch_0
++
++    move-object v0, v2
++
++    :cond_0
++    return-object v0
++
++    :catch_0
++    move-exception v1
++
++    const-string v2, "WebpMovie"
++
++    const-string v3, "load WEBP: "
++
++    invoke-static {v2, v3, v1}, Landroid/util/Log;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
++
++    return-object v0
++
++    :cond_1
++    return-object v0
++.end method
++
++
++# virtual methods
++.method protected a()V
++    .locals 1
++
++    invoke-super {p0}, Lcom/alensw/b/h/h;->a()V
++
++    const/4 v0, 0x0
++
++    invoke-virtual {p0, v0}, Lcom/alensw/b/h/r;->a(Z)V
++
++    return-void
++.end method
++
++.method public a(Landroid/graphics/Canvas;Landroid/graphics/Matrix;Lcom/alensw/b/h/j;Landroid/graphics/Matrix;Landroid/graphics/Paint;Z)V
++    .locals 2
++
++    iget-object v0, p0, Lcom/alensw/b/h/r;->j:Landroid/graphics/drawable/AnimatedImageDrawable;
++
++    if-eqz v0, :cond_0
++
++    const/4 v1, 0x1
++
++    invoke-virtual {p1, v1}, Landroid/graphics/Canvas;->save(I)I
++
++    invoke-virtual {p1, p2}, Landroid/graphics/Canvas;->concat(Landroid/graphics/Matrix;)V
++
++    invoke-virtual {v0, p1}, Landroid/graphics/drawable/AnimatedImageDrawable;->draw(Landroid/graphics/Canvas;)V
++
++    invoke-virtual {p1}, Landroid/graphics/Canvas;->restore()V
++
++    return-void
++
++    :cond_0
++    if-eqz p3, :cond_1
++
++    invoke-virtual {p3}, Lcom/alensw/b/h/j;->j()Z
++
++    move-result v0
++
++    if-eqz v0, :cond_1
++
++    invoke-virtual {p3}, Lcom/alensw/b/h/j;->d()Landroid/graphics/Bitmap;
++
++    move-result-object v0
++
++    invoke-virtual {p1, v0, p4, p5}, Landroid/graphics/Canvas;->drawBitmap(Landroid/graphics/Bitmap;Landroid/graphics/Matrix;Landroid/graphics/Paint;)V
++
++    :cond_1
++    return-void
++.end method
++
++.method public a(Z)V
++    .locals 2
++
++    iget-object v0, p0, Lcom/alensw/b/h/r;->j:Landroid/graphics/drawable/AnimatedImageDrawable;
++
++    if-eqz v0, :cond_0
++
++    invoke-virtual {v0}, Landroid/graphics/drawable/AnimatedImageDrawable;->stop()V
++
++    const/4 v1, 0x0
++
++    invoke-virtual {v0, v1}, Landroid/graphics/drawable/AnimatedImageDrawable;->setCallback(Landroid/graphics/drawable/Drawable$Callback;)V
++
++    :cond_0
++    return-void
++.end method
++
++.method public a(Landroid/view/View;Landroid/graphics/Paint;)Z
++    .locals 2
++
++    iget-object v0, p0, Lcom/alensw/b/h/r;->j:Landroid/graphics/drawable/AnimatedImageDrawable;
++
++    if-eqz v0, :cond_0
++
++    invoke-virtual {v0, p1}, Landroid/graphics/drawable/AnimatedImageDrawable;->setCallback(Landroid/graphics/drawable/Drawable$Callback;)V
++
++    invoke-virtual {v0}, Landroid/graphics/drawable/AnimatedImageDrawable;->start()V
++
++    const/4 v1, 0x1
++
++    return v1
++
++    :cond_0
++    const/4 v1, 0x0
++
++    return v1
++.end method
++
++.method public b()J
++    .locals 2
++
++    iget-wide v0, p0, Lcom/alensw/b/h/r;->k:J
++
++    return-wide v0
++.end method

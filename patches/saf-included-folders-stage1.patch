@@ -1,0 +1,239 @@
+--- decoded/smali/com/alensw/ui/activity/PathListActivity.smali	2026-02-20 10:03:15.805539298 +0800
++++ decoded/smali/com/alensw/ui/activity/PathListActivity.smali	2026-02-20 10:02:31.707082055 +0800
+@@ -50,15 +50,64 @@
+ 
+ # virtual methods
+ .method protected b()V
+-    .locals 3
++    .locals 6
++
++    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
++
++    const/16 v1, 0x1e
++
++    if-lt v0, v1, :cond_0
++
++    const/4 v0, 0x1
++
++    :goto_0
++    const-string v1, "com.alensw.PicFolder_preferences"
++
++    const/4 v2, 0x0
++
++    invoke-virtual {p0, v1, v2}, Lcom/alensw/ui/activity/PathListActivity;->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;
++
++    move-result-object v1
++
++    const-string v2, "external_files"
++
++    invoke-interface {v1, v2, v0}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
++
++    move-result v0
++
++    if-eqz v0, :cond_2
++
++    new-instance v0, Landroid/content/Intent;
++
++    const-string v1, "android.intent.action.OPEN_DOCUMENT_TREE"
++
++    invoke-direct {v0, v1}, Landroid/content/Intent;-><init>(Ljava/lang/String;)V
++
++    const-string v1, "android.content.extra.SHOW_ADVANCED"
++
++    const/4 v2, 0x1
+ 
++    invoke-virtual {v0, v1, v2}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Z)Landroid/content/Intent;
++
++    const v1, 0x3235
++
++    invoke-virtual {p0, v0, v1}, Lcom/alensw/ui/activity/PathListActivity;->startActivityForResult(Landroid/content/Intent;I)V
++
++    return-void
++
++    :cond_0
++    const/4 v0, 0x0
++
++    goto :goto_0
++
++    :cond_2
+     iget-boolean v0, p0, Lcom/alensw/ui/activity/PathListActivity;->e:Z
+ 
+-    if-eqz v0, :cond_0
++    if-eqz v0, :cond_1
+ 
+     const/4 v0, 0x0
+ 
+-    :goto_0
++    :goto_1
+     const/4 v1, 0x0
+ 
+     new-instance v2, Lcom/alensw/ui/activity/bh;
+@@ -69,10 +118,43 @@
+ 
+     return-void
+ 
+-    :cond_0
++    :cond_1
+     const/4 v0, 0x1
+ 
+-    goto :goto_0
++    goto :goto_1
++.end method
++
++.method private c(Ljava/lang/String;)V
++    .locals 3
++
++    iget-object v0, p0, Lcom/alensw/ui/activity/PathListActivity;->a:Ljava/util/ArrayList;
++
++    sget-object v1, Lcom/alensw/b/b/b;->a:Lcom/alensw/b/b/c;
++
++    invoke-static {v0, p1, v1}, Lcom/alensw/b/l/b;->a(Ljava/util/List;Ljava/lang/Object;Ljava/util/Comparator;)I
++
++    move-result v0
++
++    if-gez v0, :cond_0
++
++    neg-int v0, v0
++
++    add-int/lit8 v0, v0, -0x1
++
++    iget-object v1, p0, Lcom/alensw/ui/activity/PathListActivity;->a:Ljava/util/ArrayList;
++
++    invoke-virtual {v1, v0, p1}, Ljava/util/ArrayList;->add(ILjava/lang/Object;)V
++
++    const/4 v0, 0x1
++
++    iput-boolean v0, p0, Lcom/alensw/ui/activity/PathListActivity;->d:Z
++
++    iget-object v0, p0, Lcom/alensw/ui/activity/PathListActivity;->b:Landroid/widget/BaseAdapter;
++
++    invoke-virtual {v0}, Landroid/widget/BaseAdapter;->notifyDataSetChanged()V
++
++    :cond_0
++    return-void
+ .end method
+ 
+ .method public onCreate(Landroid/os/Bundle;)V
+@@ -203,6 +285,60 @@
+     return v0
+ .end method
+ 
++.method protected onActivityResult(IILandroid/content/Intent;)V
++    .locals 4
++
++    invoke-super {p0, p1, p2, p3}, Lcom/alensw/ui/activity/ao;->onActivityResult(IILandroid/content/Intent;)V
++
++    const v0, 0x3235
++
++    if-ne p1, v0, :cond_1
++
++    const/4 v0, -0x1
++
++    if-ne p2, v0, :cond_1
++
++    if-eqz p3, :cond_1
++
++    :try_start_0
++    invoke-virtual {p3}, Landroid/content/Intent;->getData()Landroid/net/Uri;
++
++    move-result-object v0
++
++    if-eqz v0, :cond_1
++
++    invoke-virtual {p0}, Lcom/alensw/ui/activity/PathListActivity;->getContentResolver()Landroid/content/ContentResolver;
++
++    move-result-object v1
++
++    invoke-virtual {p3}, Landroid/content/Intent;->getFlags()I
++
++    move-result v2
++
++    and-int/lit8 v2, v2, 0x3
++
++    invoke-virtual {v1, v0, v2}, Landroid/content/ContentResolver;->takePersistableUriPermission(Landroid/net/Uri;I)V
++
++    invoke-virtual {v0}, Landroid/net/Uri;->toString()Ljava/lang/String;
++
++    move-result-object v0
++
++    invoke-direct {p0, v0}, Lcom/alensw/ui/activity/PathListActivity;->c(Ljava/lang/String;)V
++    :try_end_0
++    .catch Ljava/lang/Throwable; {:try_start_0 .. :try_end_0} :catch_0
++
++    goto :goto_0
++
++    :catch_0
++    move-exception v0
++
++    invoke-static {p0, v0}, Lcom/alensw/b/l/b;->a(Landroid/content/Context;Ljava/lang/Throwable;)V
++
++    :cond_1
++    :goto_0
++    return-void
++.end method
++
+ .method public onOptionsItemSelected(Landroid/view/MenuItem;)Z
+     .locals 1
+ 
+--- decoded/smali/com/alensw/a/v.smali	2026-02-20 10:03:15.690075830 +0800
++++ decoded/smali/com/alensw/a/v.smali	2026-02-20 03:39:52.690362524 +0800
+@@ -1411,6 +1411,14 @@
+ 
+     check-cast v0, Ljava/lang/String;
+ 
++    const-string v7, "/"
++
++    invoke-virtual {v0, v7}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
++
++    move-result v7
++
++    if-eqz v7, :goto_2
++
+     iget-object v7, p0, Lcom/alensw/a/v;->f:Lcom/alensw/a/u;
+ 
+     invoke-static {v7}, Lcom/alensw/a/u;->c(Lcom/alensw/a/u;)Ljava/util/HashMap;
+--- decoded/smali/com/alensw/a/o.smali	2026-02-20 10:03:15.685952796 +0800
++++ decoded/smali/com/alensw/a/o.smali	2026-02-20 03:39:52.690362524 +0800
+@@ -95,6 +95,42 @@
+ 
+     move-result-object v7
+ 
++    new-instance v1, Ljava/util/ArrayList;
++
++    invoke-direct {v1}, Ljava/util/ArrayList;-><init>()V
++
++    invoke-virtual {v7}, Ljava/util/ArrayList;->iterator()Ljava/util/Iterator;
++
++    move-result-object v2
++
++    :goto_filter
++    invoke-interface {v2}, Ljava/util/Iterator;->hasNext()Z
++
++    move-result v3
++
++    if-eqz v3, :cond_filter_done
++
++    invoke-interface {v2}, Ljava/util/Iterator;->next()Ljava/lang/Object;
++
++    move-result-object v3
++
++    check-cast v3, Ljava/lang/String;
++
++    const-string v4, "/"
++
++    invoke-virtual {v3, v4}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
++
++    move-result v4
++
++    if-eqz v4, :goto_filter
++
++    invoke-virtual {v1, v3}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
++
++    goto :goto_filter
++
++    :cond_filter_done
++    move-object v7, v1
++
+     invoke-virtual {v7}, Ljava/util/ArrayList;->size()I
+ 
+     move-result v8

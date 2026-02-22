@@ -1,0 +1,17 @@
+# Pinned local toolchain for deterministic host builds.
+# This file is sourced by scripts/bootstrap_toolchain.sh and scripts/check_system_deps.sh.
+
+APKTOOL_VERSION=2.7.0
+APKTOOL_URL=https://github.com/iBotPeaches/Apktool/releases/download/v2.7.0/apktool_2.7.0.jar
+APKTOOL_SHA256=c11b5eb518d9ac2ab18e959cbe087499079072b04d567cdcae5ceb447f9a7e7d
+
+ANDROID_BUILD_TOOLS_VERSION=34.0.0
+ANDROID_BUILD_TOOLS_ARCHIVE_URL=https://dl.google.com/android/repository/build-tools_r34-linux.zip
+ANDROID_BUILD_TOOLS_ARCHIVE_SHA256=e858c4b60069d0431051b225d384413b1643e1289b00a4825aed347f25bd510f
+ANDROID_BUILD_TOOLS_EXTRACT_DIR=android-14
+AAPT2_VERSION=2.19-10229193
+
+JADX_VERSION=1.5.2
+JADX_ARCHIVE_URL=https://github.com/skylot/jadx/releases/download/v1.5.2/jadx-1.5.2.zip
+JADX_ARCHIVE_SHA256=5a8b480839c9c61527895d81d5572182279d973abe112047417f237df958a3aa
+JADX_BIN_RELATIVE_PATH=bin/jadx
