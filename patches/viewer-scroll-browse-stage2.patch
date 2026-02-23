@@ -1,5 +1,5 @@
---- /tmp/viewer_stage2_base/decoded/res/layout/viewer.xml	2026-02-23 11:59:02.422998452 -0500
-+++ ./decoded/res/layout/viewer.xml	2026-02-23 11:59:02.426998439 -0500
+--- /tmp/stage1_root/decoded/res/layout/viewer.xml	2026-02-23 12:22:16.947883269 -0500
++++ ./decoded/res/layout/viewer.xml	2026-02-23 12:17:14.568419735 -0500
 @@ -2,6 +2,9 @@
  <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
    xmlns:android="http://schemas.android.com/apk/res/android">
@@ -17,20 +17,20 @@
 -</RelativeLayout>
 \ No newline at end of file
 +</RelativeLayout>
---- /tmp/viewer_stage2_base/decoded/smali/com/alensw/ui/c/as.smali	2026-02-23 11:59:02.422998452 -0500
-+++ ./decoded/smali/com/alensw/ui/c/as.smali	2026-02-23 11:59:02.426998439 -0500
-@@ -329,6 +329,173 @@
+--- /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as.smali	2026-02-23 12:22:17.591882201 -0500
++++ ./decoded/smali/com/alensw/ui/c/as.smali	2026-02-23 12:19:29.100157857 -0500
+@@ -329,6 +329,213 @@
      return-void
  .end method
  
 +.method private B0()V
-+    .locals 12
++    .locals 15
 +
-+    const/16 v11, 0x8
++    const/16 v14, 0x8
 +
-+    const/4 v10, 0x1
++    const/4 v13, 0x1
 +
-+    const/4 v9, 0x0
++    const/4 v12, 0x0
 +
 +    iget-object v0, p0, Lcom/alensw/ui/c/as;->C:Lcom/alensw/ui/c/cx;
 +
@@ -40,7 +40,7 @@
 +
 +    const-string v1, "viewer_scroll_browse"
 +
-+    invoke-interface {v0, v1, v9}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
++    invoke-interface {v0, v1, v12}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
 +
 +    move-result v0
 +
@@ -51,7 +51,7 @@
 +    :cond_0
 +    iget-object v0, p0, Lcom/alensw/ui/c/as;->f:Lcom/alensw/ui/view/PictureView;
 +
-+    invoke-virtual {v0, v11}, Lcom/alensw/ui/view/PictureView;->setVisibility(I)V
++    invoke-virtual {v0, v14}, Lcom/alensw/ui/view/PictureView;->setVisibility(I)V
 +
 +    const v0, 0x7f090043
 +
@@ -61,7 +61,7 @@
 +
 +    if-eqz v0, :cond_1
 +
-+    invoke-virtual {v0, v11}, Landroid/view/View;->setVisibility(I)V
++    invoke-virtual {v0, v14}, Landroid/view/View;->setVisibility(I)V
 +
 +    :cond_1
 +    const v0, 0x7f090037
@@ -72,9 +72,9 @@
 +
 +    check-cast v0, Landroid/widget/ScrollView;
 +
-+    if-eqz v0, :cond_7
++    if-eqz v0, :cond_b
 +
-+    invoke-virtual {v0, v9}, Landroid/widget/ScrollView;->setVisibility(I)V
++    invoke-virtual {v0, v12}, Landroid/widget/ScrollView;->setVisibility(I)V
 +
 +    new-instance v1, Lcom/alensw/ui/c/as_scroll_touch;
 +
@@ -90,74 +90,114 @@
 +
 +    check-cast v0, Landroid/widget/LinearLayout;
 +
-+    if-eqz v0, :cond_7
++    if-eqz v0, :cond_b
 +
 +    invoke-virtual {v0}, Landroid/widget/LinearLayout;->removeAllViews()V
 +
 +    iget-object v1, p0, Lcom/alensw/ui/c/as;->k:Lcom/alensw/bean/CommonFolder;
 +
-+    if-eqz v1, :cond_5
++    if-eqz v1, :cond_9
 +
 +    invoke-virtual {v1}, Lcom/alensw/bean/CommonFolder;->o()I
 +
 +    move-result v2
 +
-+    move v3, v9
++    if-lez v2, :cond_b
 +
-+    :goto_0
-+    if-ge v3, v2, :cond_6
++    iget v3, v1, Lcom/alensw/bean/CommonFolder;->k:I
 +
-+    invoke-virtual {v1, v3}, Lcom/alensw/bean/CommonFolder;->a(I)Lcom/alensw/bean/CommonFile;
++    if-gez v3, :cond_2
 +
-+    move-result-object v4
++    move v3, v12
 +
-+    if-eqz v4, :cond_4
++    :cond_2
++    if-lt v3, v2, :cond_3
 +
-+    invoke-virtual {v4}, Lcom/alensw/bean/CommonFile;->i()Landroid/net/Uri;
++    add-int/lit8 v3, v2, -0x1
 +
-+    move-result-object v5
++    :cond_3
++    add-int/lit8 v4, v3, -0x8
 +
-+    if-eqz v5, :cond_4
++    if-gez v4, :cond_4
 +
-+    new-instance v6, Landroid/widget/ImageView;
-+
-+    iget-object v7, p0, Lcom/alensw/ui/c/as;->C:Lcom/alensw/ui/c/cx;
-+
-+    invoke-direct {v6, v7}, Landroid/widget/ImageView;-><init>(Landroid/content/Context;)V
-+
-+    sget-object v7, Landroid/widget/ImageView$ScaleType;->FIT_CENTER:Landroid/widget/ImageView$ScaleType;
-+
-+    invoke-virtual {v6, v7}, Landroid/widget/ImageView;->setScaleType(Landroid/widget/ImageView$ScaleType;)V
-+
-+    invoke-virtual {v6, v10}, Landroid/widget/ImageView;->setAdjustViewBounds(Z)V
-+
-+    invoke-virtual {v6, v5}, Landroid/widget/ImageView;->setImageURI(Landroid/net/Uri;)V
-+
-+    new-instance v7, Landroid/widget/LinearLayout$LayoutParams;
-+
-+    const/4 v8, -0x1
-+
-+    const/4 v4, -0x2
-+
-+    invoke-direct {v7, v8, v4}, Landroid/widget/LinearLayout$LayoutParams;-><init>(II)V
-+
-+    invoke-virtual {v0, v6, v7}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
++    move v4, v12
 +
 +    :cond_4
-+    add-int/lit8 v3, v3, 0x1
++    add-int/lit8 v5, v3, 0x9
++
++    if-le v5, v2, :cond_5
++
++    move v5, v2
++
++    :cond_5
++    invoke-static {v4}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
++
++    move-result-object v2
++
++    invoke-virtual {v0, v2}, Landroid/widget/LinearLayout;->setTag(Ljava/lang/Object;)V
++
++    move v2, v4
++
++    :goto_0
++    if-ge v2, v5, :cond_a
++
++    invoke-virtual {v1, v2}, Lcom/alensw/bean/CommonFolder;->a(I)Lcom/alensw/bean/CommonFile;
++
++    move-result-object v3
++
++    if-eqz v3, :cond_8
++
++    invoke-virtual {v3}, Lcom/alensw/bean/CommonFile;->i()Landroid/net/Uri;
++
++    move-result-object v6
++
++    if-eqz v6, :cond_8
++
++    new-instance v7, Landroid/widget/ImageView;
++
++    iget-object v8, p0, Lcom/alensw/ui/c/as;->C:Lcom/alensw/ui/c/cx;
++
++    invoke-direct {v7, v8}, Landroid/widget/ImageView;-><init>(Landroid/content/Context;)V
++
++    sget-object v8, Landroid/widget/ImageView$ScaleType;->FIT_CENTER:Landroid/widget/ImageView$ScaleType;
++
++    invoke-virtual {v7, v8}, Landroid/widget/ImageView;->setScaleType(Landroid/widget/ImageView$ScaleType;)V
++
++    invoke-virtual {v7, v13}, Landroid/widget/ImageView;->setAdjustViewBounds(Z)V
++
++    invoke-virtual {v7, v6}, Landroid/widget/ImageView;->setImageURI(Landroid/net/Uri;)V
++
++    new-instance v8, Landroid/widget/LinearLayout$LayoutParams;
++
++    const/4 v9, -0x1
++
++    const/4 v10, -0x2
++
++    invoke-direct {v8, v9, v10}, Landroid/widget/LinearLayout$LayoutParams;-><init>(II)V
++
++    invoke-virtual {v0, v7, v8}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
++
++    :cond_8
++    add-int/lit8 v2, v2, 0x1
 +
 +    goto :goto_0
 +
-+    :cond_5
++    :cond_9
 +    iget-object v1, p0, Lcom/alensw/ui/c/as;->l:Lcom/alensw/bean/CommonFile;
 +
-+    if-eqz v1, :cond_6
++    if-eqz v1, :cond_a
 +
 +    invoke-virtual {v1}, Lcom/alensw/bean/CommonFile;->i()Landroid/net/Uri;
 +
 +    move-result-object v1
 +
-+    if-eqz v1, :cond_6
++    if-eqz v1, :cond_a
++
++    invoke-static {v12}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
++
++    move-result-object v2
++
++    invoke-virtual {v0, v2}, Landroid/widget/LinearLayout;->setTag(Ljava/lang/Object;)V
 +
 +    new-instance v2, Landroid/widget/ImageView;
 +
@@ -169,7 +209,7 @@
 +
 +    invoke-virtual {v2, v3}, Landroid/widget/ImageView;->setScaleType(Landroid/widget/ImageView$ScaleType;)V
 +
-+    invoke-virtual {v2, v10}, Landroid/widget/ImageView;->setAdjustViewBounds(Z)V
++    invoke-virtual {v2, v13}, Landroid/widget/ImageView;->setAdjustViewBounds(Z)V
 +
 +    invoke-virtual {v2, v1}, Landroid/widget/ImageView;->setImageURI(Landroid/net/Uri;)V
 +
@@ -183,26 +223,26 @@
 +
 +    invoke-virtual {v0, v2, v1}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 +
-+    :cond_6
++    :cond_a
 +    invoke-virtual {p0}, Lcom/alensw/ui/c/as;->B1()V
 +
-+    :cond_7
++    :cond_b
 +    return-void
 +.end method
 +
  .method public static a(Lcom/alensw/bean/CommonFolder;Z)Landroid/content/Intent;
      .locals 2
  
-@@ -2263,6 +2430,175 @@
+@@ -2263,6 +2470,196 @@
      return-wide v2
  .end method
  
 +.method public B1()V
-+    .locals 14
++    .locals 15
 +
-+    const/4 v13, 0x0
++    const/4 v14, 0x0
 +
-+    const/4 v12, 0x1
++    const/4 v13, 0x1
 +
 +    iget-object v0, p0, Lcom/alensw/ui/c/as;->C:Lcom/alensw/ui/c/cx;
 +
@@ -212,7 +252,7 @@
 +
 +    const-string v1, "viewer_scroll_browse"
 +
-+    invoke-interface {v0, v1, v13}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
++    invoke-interface {v0, v1, v14}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
 +
 +    move-result v0
 +
@@ -229,7 +269,7 @@
 +
 +    check-cast v0, Landroid/widget/ScrollView;
 +
-+    if-eqz v0, :cond_8
++    if-eqz v0, :cond_a
 +
 +    const v1, 0x7f09000d
 +
@@ -239,13 +279,13 @@
 +
 +    check-cast v1, Landroid/widget/LinearLayout;
 +
-+    if-eqz v1, :cond_8
++    if-eqz v1, :cond_a
 +
 +    invoke-virtual {v1}, Landroid/widget/LinearLayout;->getChildCount()I
 +
 +    move-result v2
 +
-+    if-lez v2, :cond_8
++    if-lez v2, :cond_a
 +
 +    invoke-virtual {v0}, Landroid/widget/ScrollView;->getScrollY()I
 +
@@ -308,68 +348,89 @@
 +    goto :goto_0
 +
 +    :cond_2
++    const/4 v8, 0x0
++
++    invoke-virtual {v1}, Landroid/widget/LinearLayout;->getTag()Ljava/lang/Object;
++
++    move-result-object v0
++
++    instance-of v1, v0, Ljava/lang/Integer;
++
++    if-eqz v1, :cond_3
++
++    check-cast v0, Ljava/lang/Integer;
++
++    invoke-virtual {v0}, Ljava/lang/Integer;->intValue()I
++
++    move-result v8
++
++    :cond_3
++    add-int v7, v7, v8
++
 +    iget-object v0, p0, Lcom/alensw/ui/c/as;->k:Lcom/alensw/bean/CommonFolder;
 +
-+    if-eqz v0, :cond_7
++    if-eqz v0, :cond_9
 +
 +    invoke-virtual {v0}, Lcom/alensw/bean/CommonFolder;->o()I
 +
 +    move-result v1
 +
-+    if-ge v7, v1, :cond_8
++    if-ltz v7, :cond_a
++
++    if-ge v7, v1, :cond_a
 +
 +    iget v1, v0, Lcom/alensw/bean/CommonFolder;->k:I
 +
-+    if-ne v1, v7, :cond_3
++    if-ne v1, v7, :cond_4
 +
 +    return-void
 +
-+    :cond_3
++    :cond_4
 +    iput v7, v0, Lcom/alensw/bean/CommonFolder;->k:I
 +
 +    invoke-virtual {v0, v7}, Lcom/alensw/bean/CommonFolder;->a(I)Lcom/alensw/bean/CommonFile;
 +
 +    move-result-object v0
 +
-+    if-eqz v0, :cond_8
++    if-eqz v0, :cond_a
 +
 +    iput-object v0, p0, Lcom/alensw/ui/c/as;->l:Lcom/alensw/bean/CommonFile;
 +
-+    invoke-direct {p0, v0, v12}, Lcom/alensw/ui/c/as;->a(Lcom/alensw/bean/CommonFile;Z)Lcom/alensw/b/h/j;
++    invoke-direct {p0, v0, v13}, Lcom/alensw/ui/c/as;->a(Lcom/alensw/bean/CommonFile;Z)Lcom/alensw/b/h/j;
 +
 +    move-result-object v1
 +
-+    if-eqz v1, :cond_8
++    if-eqz v1, :cond_a
 +
-+    invoke-virtual {p0, v1, v13}, Lcom/alensw/ui/c/as;->a(Lcom/alensw/b/h/j;Z)V
++    invoke-virtual {p0, v1, v14}, Lcom/alensw/ui/c/as;->a(Lcom/alensw/b/h/j;Z)V
 +
-+    invoke-virtual {p0, v13}, Lcom/alensw/ui/c/as;->c(Z)V
++    invoke-virtual {p0, v14}, Lcom/alensw/ui/c/as;->c(Z)V
 +
 +    return-void
 +
-+    :cond_7
++    :cond_9
 +    iget-object v0, p0, Lcom/alensw/ui/c/as;->l:Lcom/alensw/bean/CommonFile;
 +
-+    if-eqz v0, :cond_8
++    if-eqz v0, :cond_a
 +
-+    invoke-direct {p0, v0, v12}, Lcom/alensw/ui/c/as;->a(Lcom/alensw/bean/CommonFile;Z)Lcom/alensw/b/h/j;
++    invoke-direct {p0, v0, v13}, Lcom/alensw/ui/c/as;->a(Lcom/alensw/bean/CommonFile;Z)Lcom/alensw/b/h/j;
 +
 +    move-result-object v0
 +
-+    if-eqz v0, :cond_8
++    if-eqz v0, :cond_a
 +
-+    invoke-virtual {p0, v0, v13}, Lcom/alensw/ui/c/as;->a(Lcom/alensw/b/h/j;Z)V
++    invoke-virtual {p0, v0, v14}, Lcom/alensw/ui/c/as;->a(Lcom/alensw/b/h/j;Z)V
 +
-+    invoke-virtual {p0, v13}, Lcom/alensw/ui/c/as;->c(Z)V
++    invoke-virtual {p0, v14}, Lcom/alensw/ui/c/as;->c(Z)V
 +
-+    :cond_8
++    :cond_a
 +    return-void
 +.end method
 +
  .method public a()V
      .locals 8
      .annotation build Landroid/annotation/TargetApi;
-@@ -3100,6 +3436,8 @@
+@@ -3100,6 +3497,8 @@
  
      invoke-virtual {v0, v8}, Landroid/view/View;->setVisibility(I)V
  
@@ -378,20 +439,20 @@
      goto/16 :goto_0
  
      :cond_4
---- /tmp/viewer_stage2_base/decoded/smali/com/alensw/ui/c/dp.smali	2026-02-23 11:59:02.426998439 -0500
-+++ ./decoded/smali/com/alensw/ui/c/dp.smali	2026-02-23 11:59:02.426998439 -0500
-@@ -525,6 +525,161 @@
+--- /tmp/stage1_root/decoded/smali/com/alensw/ui/c/dp.smali	2026-02-23 12:22:17.591882201 -0500
++++ ./decoded/smali/com/alensw/ui/c/dp.smali	2026-02-23 12:21:28.687962728 -0500
+@@ -525,6 +525,201 @@
      return-void
  .end method
  
 +.method private N0()V
-+    .locals 12
++    .locals 15
 +
-+    const/16 v11, 0x8
++    const/16 v14, 0x8
 +
-+    const/4 v10, 0x1
++    const/4 v13, 0x1
 +
-+    const/4 v9, 0x0
++    const/4 v12, 0x0
 +
 +    iget-object v0, p0, Lcom/alensw/ui/c/dp;->C:Lcom/alensw/ui/c/cx;
 +
@@ -401,7 +462,7 @@
 +
 +    const-string v1, "viewer_scroll_browse"
 +
-+    invoke-interface {v0, v1, v9}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
++    invoke-interface {v0, v1, v12}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
 +
 +    move-result v0
 +
@@ -412,7 +473,7 @@
 +    :cond_0
 +    iget-object v0, p0, Lcom/alensw/ui/c/dp;->f:Lcom/alensw/ui/view/PictureView;
 +
-+    invoke-virtual {v0, v11}, Lcom/alensw/ui/view/PictureView;->setVisibility(I)V
++    invoke-virtual {v0, v14}, Lcom/alensw/ui/view/PictureView;->setVisibility(I)V
 +
 +    const v0, 0x7f090043
 +
@@ -422,7 +483,7 @@
 +
 +    if-eqz v0, :cond_1
 +
-+    invoke-virtual {v0, v11}, Landroid/view/View;->setVisibility(I)V
++    invoke-virtual {v0, v14}, Landroid/view/View;->setVisibility(I)V
 +
 +    :cond_1
 +    const v0, 0x7f090037
@@ -433,9 +494,9 @@
 +
 +    check-cast v0, Landroid/widget/ScrollView;
 +
-+    if-eqz v0, :cond_7
++    if-eqz v0, :cond_b
 +
-+    invoke-virtual {v0, v9}, Landroid/widget/ScrollView;->setVisibility(I)V
++    invoke-virtual {v0, v12}, Landroid/widget/ScrollView;->setVisibility(I)V
 +
 +    new-instance v1, Lcom/alensw/ui/c/dp_scroll_touch;
 +
@@ -451,62 +512,102 @@
 +
 +    check-cast v0, Landroid/widget/LinearLayout;
 +
-+    if-eqz v0, :cond_7
++    if-eqz v0, :cond_b
 +
 +    invoke-virtual {v0}, Landroid/widget/LinearLayout;->removeAllViews()V
 +
 +    iget-object v1, p0, Lcom/alensw/ui/c/dp;->m:Lcom/alensw/a/e;
 +
-+    if-eqz v1, :cond_5
++    if-eqz v1, :cond_9
 +
 +    invoke-virtual {v1}, Lcom/alensw/a/e;->j()I
 +
 +    move-result v2
 +
-+    move v3, v9
++    if-lez v2, :cond_b
 +
-+    :goto_0
-+    if-ge v3, v2, :cond_6
++    iget v3, v1, Lcom/alensw/a/e;->c:I
 +
-+    invoke-virtual {v1, v3}, Lcom/alensw/a/e;->d(I)Landroid/net/Uri;
++    if-gez v3, :cond_2
 +
-+    move-result-object v4
++    move v3, v12
 +
-+    if-eqz v4, :cond_4
++    :cond_2
++    if-lt v3, v2, :cond_3
 +
-+    new-instance v5, Landroid/widget/ImageView;
++    add-int/lit8 v3, v2, -0x1
 +
-+    iget-object v6, p0, Lcom/alensw/ui/c/dp;->C:Lcom/alensw/ui/c/cx;
++    :cond_3
++    add-int/lit8 v4, v3, -0x8
 +
-+    invoke-direct {v5, v6}, Landroid/widget/ImageView;-><init>(Landroid/content/Context;)V
++    if-gez v4, :cond_4
 +
-+    sget-object v6, Landroid/widget/ImageView$ScaleType;->FIT_CENTER:Landroid/widget/ImageView$ScaleType;
-+
-+    invoke-virtual {v5, v6}, Landroid/widget/ImageView;->setScaleType(Landroid/widget/ImageView$ScaleType;)V
-+
-+    invoke-virtual {v5, v10}, Landroid/widget/ImageView;->setAdjustViewBounds(Z)V
-+
-+    invoke-virtual {v5, v4}, Landroid/widget/ImageView;->setImageURI(Landroid/net/Uri;)V
-+
-+    new-instance v6, Landroid/widget/LinearLayout$LayoutParams;
-+
-+    const/4 v7, -0x1
-+
-+    const/4 v8, -0x2
-+
-+    invoke-direct {v6, v7, v8}, Landroid/widget/LinearLayout$LayoutParams;-><init>(II)V
-+
-+    invoke-virtual {v0, v5, v6}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
++    move v4, v12
 +
 +    :cond_4
-+    add-int/lit8 v3, v3, 0x1
++    add-int/lit8 v5, v3, 0x9
++
++    if-le v5, v2, :cond_5
++
++    move v5, v2
++
++    :cond_5
++    invoke-static {v4}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
++
++    move-result-object v2
++
++    invoke-virtual {v0, v2}, Landroid/widget/LinearLayout;->setTag(Ljava/lang/Object;)V
++
++    move v2, v4
++
++    :goto_0
++    if-ge v2, v5, :cond_a
++
++    invoke-virtual {v1, v2}, Lcom/alensw/a/e;->d(I)Landroid/net/Uri;
++
++    move-result-object v6
++
++    if-eqz v6, :cond_8
++
++    new-instance v7, Landroid/widget/ImageView;
++
++    iget-object v8, p0, Lcom/alensw/ui/c/dp;->C:Lcom/alensw/ui/c/cx;
++
++    invoke-direct {v7, v8}, Landroid/widget/ImageView;-><init>(Landroid/content/Context;)V
++
++    sget-object v8, Landroid/widget/ImageView$ScaleType;->FIT_CENTER:Landroid/widget/ImageView$ScaleType;
++
++    invoke-virtual {v7, v8}, Landroid/widget/ImageView;->setScaleType(Landroid/widget/ImageView$ScaleType;)V
++
++    invoke-virtual {v7, v13}, Landroid/widget/ImageView;->setAdjustViewBounds(Z)V
++
++    invoke-virtual {v7, v6}, Landroid/widget/ImageView;->setImageURI(Landroid/net/Uri;)V
++
++    new-instance v8, Landroid/widget/LinearLayout$LayoutParams;
++
++    const/4 v9, -0x1
++
++    const/4 v10, -0x2
++
++    invoke-direct {v8, v9, v10}, Landroid/widget/LinearLayout$LayoutParams;-><init>(II)V
++
++    invoke-virtual {v0, v7, v8}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
++
++    :cond_8
++    add-int/lit8 v2, v2, 0x1
 +
 +    goto :goto_0
 +
-+    :cond_5
++    :cond_9
 +    iget-object v1, p0, Lcom/alensw/ui/c/dp;->o:Landroid/net/Uri;
 +
-+    if-eqz v1, :cond_6
++    if-eqz v1, :cond_a
++
++    invoke-static {v12}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
++
++    move-result-object v2
++
++    invoke-virtual {v0, v2}, Landroid/widget/LinearLayout;->setTag(Ljava/lang/Object;)V
 +
 +    new-instance v2, Landroid/widget/ImageView;
 +
@@ -518,7 +619,7 @@
 +
 +    invoke-virtual {v2, v3}, Landroid/widget/ImageView;->setScaleType(Landroid/widget/ImageView$ScaleType;)V
 +
-+    invoke-virtual {v2, v10}, Landroid/widget/ImageView;->setAdjustViewBounds(Z)V
++    invoke-virtual {v2, v13}, Landroid/widget/ImageView;->setAdjustViewBounds(Z)V
 +
 +    invoke-virtual {v2, v1}, Landroid/widget/ImageView;->setImageURI(Landroid/net/Uri;)V
 +
@@ -532,17 +633,17 @@
 +
 +    invoke-virtual {v0, v2, v1}, Landroid/widget/LinearLayout;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
 +
-+    :cond_6
++    :cond_a
 +    invoke-virtual {p0}, Lcom/alensw/ui/c/dp;->O0()V
 +
-+    :cond_7
++    :cond_b
 +    return-void
 +.end method
 +
  .method static synthetic a(Lcom/alensw/ui/c/dp;C)C
      .locals 0
  
-@@ -2072,6 +2227,181 @@
+@@ -2072,6 +2267,202 @@
      return-void
  .end method
  
@@ -578,7 +679,7 @@
 +
 +    check-cast v0, Landroid/widget/ScrollView;
 +
-+    if-eqz v0, :cond_8
++    if-eqz v0, :cond_a
 +
 +    const v1, 0x7f09000d
 +
@@ -588,13 +689,13 @@
 +
 +    check-cast v1, Landroid/widget/LinearLayout;
 +
-+    if-eqz v1, :cond_8
++    if-eqz v1, :cond_a
 +
 +    invoke-virtual {v1}, Landroid/widget/LinearLayout;->getChildCount()I
 +
 +    move-result v2
 +
-+    if-lez v2, :cond_8
++    if-lez v2, :cond_a
 +
 +    invoke-virtual {v0}, Landroid/widget/ScrollView;->getScrollY()I
 +
@@ -657,23 +758,44 @@
 +    goto :goto_0
 +
 +    :cond_2
++    const/4 v8, 0x0
++
++    invoke-virtual {v1}, Landroid/widget/LinearLayout;->getTag()Ljava/lang/Object;
++
++    move-result-object v0
++
++    instance-of v1, v0, Ljava/lang/Integer;
++
++    if-eqz v1, :cond_3
++
++    check-cast v0, Ljava/lang/Integer;
++
++    invoke-virtual {v0}, Ljava/lang/Integer;->intValue()I
++
++    move-result v8
++
++    :cond_3
++    add-int v7, v7, v8
++
 +    iget-object v0, p0, Lcom/alensw/ui/c/dp;->m:Lcom/alensw/a/e;
 +
-+    if-eqz v0, :cond_7
++    if-eqz v0, :cond_9
 +
 +    invoke-virtual {v0}, Lcom/alensw/a/e;->j()I
 +
 +    move-result v1
 +
-+    if-ge v7, v1, :cond_8
++    if-ltz v7, :cond_a
++
++    if-ge v7, v1, :cond_a
 +
 +    iget v1, v0, Lcom/alensw/a/e;->c:I
 +
-+    if-ne v1, v7, :cond_3
++    if-ne v1, v7, :cond_4
 +
 +    return-void
 +
-+    :cond_3
++    :cond_4
 +    iput v7, v0, Lcom/alensw/a/e;->c:I
 +
 +    invoke-virtual {v0, v7}, Lcom/alensw/a/e;->d(I)Landroid/net/Uri;
@@ -692,7 +814,7 @@
 +
 +    move-result-object v0
 +
-+    if-eqz v0, :cond_8
++    if-eqz v0, :cond_a
 +
 +    invoke-virtual {p0, v0, v14}, Lcom/alensw/ui/c/dp;->a(Lcom/alensw/b/h/j;Z)V
 +
@@ -700,10 +822,10 @@
 +
 +    return-void
 +
-+    :cond_7
++    :cond_9
 +    iget-object v0, p0, Lcom/alensw/ui/c/dp;->o:Landroid/net/Uri;
 +
-+    if-eqz v0, :cond_8
++    if-eqz v0, :cond_a
 +
 +    iget-char v1, p0, Lcom/alensw/ui/c/dp;->n:C
 +
@@ -711,20 +833,20 @@
 +
 +    move-result-object v0
 +
-+    if-eqz v0, :cond_8
++    if-eqz v0, :cond_a
 +
 +    invoke-virtual {p0, v0, v14}, Lcom/alensw/ui/c/dp;->a(Lcom/alensw/b/h/j;Z)V
 +
 +    invoke-virtual {p0, v14}, Lcom/alensw/ui/c/dp;->c(Z)V
 +
-+    :cond_8
++    :cond_a
 +    return-void
 +.end method
 +
  
  # virtual methods
  .method protected a(IZ)I
-@@ -3071,6 +3401,8 @@
+@@ -3071,6 +3462,8 @@
  
      invoke-static {v0, v1}, Lcom/alensw/ui/activity/ao;->a(Landroid/widget/ImageView;Landroid/graphics/drawable/shapes/Shape;)V
  
@@ -734,7 +856,7 @@
  .end method
  
 --- /dev/null	2026-02-23 07:45:39.059542164 -0500
-+++ ./decoded/smali/com/alensw/ui/c/as_scroll_touch.smali	2026-02-23 11:59:02.426998439 -0500
++++ ./decoded/smali/com/alensw/ui/c/as_scroll_touch.smali	2026-02-23 12:17:27.920389021 -0500
 @@ -0,0 +1,58 @@
 +.class Lcom/alensw/ui/c/as_scroll_touch;
 +.super Ljava/lang/Object;
@@ -795,7 +917,7 @@
 +    return v0
 +.end method
 --- /dev/null	2026-02-23 07:45:39.059542164 -0500
-+++ ./decoded/smali/com/alensw/ui/c/dp_scroll_touch.smali	2026-02-23 11:59:02.430998426 -0500
++++ ./decoded/smali/com/alensw/ui/c/dp_scroll_touch.smali	2026-02-23 12:17:41.736358065 -0500
 @@ -0,0 +1,58 @@
 +.class Lcom/alensw/ui/c/dp_scroll_touch;
 +.super Ljava/lang/Object;
