@@ -1,0 +1,383 @@
+--- decoded/smali/com/alensw/ui/c/df.smali
++++ decoded/smali/com/alensw/ui/c/df.smali
+@@ -718,8 +718,6 @@
+ 
+     const-wide/16 v4, 0x0
+ 
+-    invoke-virtual {p0}, Lcom/alensw/ui/c/df;->a()V
+-
+     new-instance v1, Ljava/lang/StringBuilder;
+ 
+     const/16 v0, 0x100
+--- decoded/smali/com/alensw/ui/c/dp.smali
++++ decoded/smali/com/alensw/ui/c/dp.smali
+@@ -45,6 +45,8 @@
+ 
+ .field private final ad:Ljava/lang/Runnable;
+ 
++.field private ae:I
++
+ .field private f:Lcom/alensw/ui/view/PictureView;
+ 
+ .field private g:Landroid/widget/ImageView;
+@@ -156,6 +158,10 @@
+ 
+     iput-object v0, p0, Lcom/alensw/ui/c/dp;->ad:Ljava/lang/Runnable;
+ 
++    const/4 v0, 0x0
++
++    iput v0, p0, Lcom/alensw/ui/c/dp;->ae:I
++
+     return-void
+ .end method
+ 
+@@ -463,6 +469,62 @@
+     goto :goto_0
+ .end method
+ 
++.method private M0()V
++    .locals 7
++
++    iget-object v0, p0, Lcom/alensw/ui/c/dp;->p:Lcom/alensw/ui/c/df;
++
++    if-eqz v0, :cond_0
++
++    iget-object v0, p0, Lcom/alensw/ui/c/dp;->o:Landroid/net/Uri;
++
++    if-nez v0, :cond_1
++
++    :cond_0
++    return-void
++
++    :cond_1
++    iget v0, p0, Lcom/alensw/ui/c/dp;->ae:I
++
++    add-int/lit8 v0, v0, 0x1
++
++    iput v0, p0, Lcom/alensw/ui/c/dp;->ae:I
++
++    :try_start_0
++    new-instance v1, Ljava/lang/Thread;
++
++    new-instance v2, Lcom/alensw/ui/c/ec;
++
++    iget-object v3, p0, Lcom/alensw/ui/c/dp;->b:Landroid/os/Handler;
++
++    iget-object v4, p0, Lcom/alensw/ui/c/dp;->p:Lcom/alensw/ui/c/df;
++
++    iget-object v5, p0, Lcom/alensw/ui/c/dp;->o:Landroid/net/Uri;
++
++    invoke-direct {v2, v3, v4, v5, v0}, Lcom/alensw/ui/c/ec;-><init>(Landroid/os/Handler;Lcom/alensw/ui/c/df;Landroid/net/Uri;I)V
++
++    const-string v6, "MetaPreload-dp"
++
++    invoke-direct {v1, v2, v6}, Ljava/lang/Thread;-><init>(Ljava/lang/Runnable;Ljava/lang/String;)V
++
++    invoke-virtual {v1}, Ljava/lang/Thread;->start()V
++    :try_end_0
++    .catch Ljava/lang/Throwable; {:try_start_0 .. :try_end_0} :catch_0
++
++    return-void
++
++    :catch_0
++    move-exception v1
++
++    const-string v2, "PictureInfo"
++
++    const-string v3, "start meta preload: "
++
++    invoke-static {v2, v3, v1}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
++
++    return-void
++.end method
++
+ .method static synthetic a(Lcom/alensw/ui/c/dp;C)C
+     .locals 0
+ 
+@@ -3328,6 +3390,8 @@
+ 
+     invoke-direct {p0, v0}, Lcom/alensw/ui/c/dp;->a(Z)V
+ 
++    invoke-direct {p0}, Lcom/alensw/ui/c/dp;->M0()V
++
+     invoke-direct {p0}, Lcom/alensw/ui/c/dp;->x()V
+ 
+     iget-object v0, p0, Lcom/alensw/ui/c/dp;->j:Landroid/widget/ImageView;
+@@ -4391,11 +4455,44 @@
+ 
+     goto :goto_0
+ 
++    :sswitch_2
++    iget v0, p1, Landroid/os/Message;->arg1:I
++
++    iget v1, p0, Lcom/alensw/ui/c/dp;->ae:I
++
++    if-ne v0, v1, :cond_0
++
++    iget-object v0, p1, Landroid/os/Message;->obj:Ljava/lang/Object;
++
++    instance-of v1, v0, Landroid/net/Uri;
++
++    if-eqz v1, :cond_0
++
++    check-cast v0, Landroid/net/Uri;
++
++    iget-object v1, p0, Lcom/alensw/ui/c/dp;->o:Landroid/net/Uri;
++
++    if-eqz v1, :cond_0
++
++    if-eq v1, v0, :cond_4
++
++    invoke-virtual {v1, v0}, Landroid/net/Uri;->equals(Ljava/lang/Object;)Z
++
++    move-result v1
++
++    if-eqz v1, :cond_0
++
++    :cond_4
++    invoke-direct {p0}, Lcom/alensw/ui/c/dp;->x()V
++
++    goto :goto_0
++
+     nop
+ 
+     :sswitch_data_0
+     .sparse-switch
+         0x1e -> :sswitch_0
++        0x1f -> :sswitch_2
+         0xbb8 -> :sswitch_1
+     .end sparse-switch
+ .end method
+--- decoded/smali/com/alensw/ui/c/as.smali
++++ decoded/smali/com/alensw/ui/c/as.smali
+@@ -43,6 +43,8 @@
+ 
+ .field private final ac:Ljava/lang/Runnable;
+ 
++.field private ad:I
++
+ .field private f:Lcom/alensw/ui/view/PictureView;
+ 
+ .field private g:Landroid/widget/ImageView;
+@@ -146,6 +148,10 @@
+ 
+     iput-object v0, p0, Lcom/alensw/ui/c/as;->ac:Ljava/lang/Runnable;
+ 
++    const/4 v0, 0x0
++
++    iput v0, p0, Lcom/alensw/ui/c/as;->ad:I
++
+     return-void
+ .end method
+ 
+@@ -258,6 +264,71 @@
+     goto :goto_0
+ .end method
+ 
++.method private A0()V
++    .locals 8
++
++    iget-object v0, p0, Lcom/alensw/ui/c/as;->m:Lcom/alensw/ui/c/df;
++
++    if-eqz v0, :cond_0
++
++    iget-object v0, p0, Lcom/alensw/ui/c/as;->l:Lcom/alensw/bean/CommonFile;
++
++    if-nez v0, :cond_1
++
++    :cond_0
++    return-void
++
++    :cond_1
++    invoke-virtual {v0}, Lcom/alensw/bean/CommonFile;->i()Landroid/net/Uri;
++
++    move-result-object v5
++
++    if-nez v5, :cond_2
++
++    return-void
++
++    :cond_2
++    iget v0, p0, Lcom/alensw/ui/c/as;->ad:I
++
++    add-int/lit8 v0, v0, 0x1
++
++    iput v0, p0, Lcom/alensw/ui/c/as;->ad:I
++
++    :try_start_0
++    new-instance v6, Ljava/lang/Thread;
++
++    new-instance v1, Lcom/alensw/ui/c/ec;
++
++    iget-object v2, p0, Lcom/alensw/ui/c/as;->b:Landroid/os/Handler;
++
++    iget-object v3, p0, Lcom/alensw/ui/c/as;->m:Lcom/alensw/ui/c/df;
++
++    move v4, v0
++
++    invoke-direct/range {v1 .. v5}, Lcom/alensw/ui/c/ec;-><init>(Landroid/os/Handler;Lcom/alensw/ui/c/df;Landroid/net/Uri;I)V
++
++    const-string v7, "MetaPreload-as"
++
++    invoke-direct {v6, v1, v7}, Ljava/lang/Thread;-><init>(Ljava/lang/Runnable;Ljava/lang/String;)V
++
++    invoke-virtual {v6}, Ljava/lang/Thread;->start()V
++    :try_end_0
++    .catch Ljava/lang/Throwable; {:try_start_0 .. :try_end_0} :catch_0
++
++    return-void
++
++    :catch_0
++    move-exception v0
++
++    const-string v1, "PictureInfo"
++
++    const-string v2, "start meta preload: "
++
++    invoke-static {v1, v2, v0}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
++
++    return-void
++.end method
++
+ .method public static a(Lcom/alensw/bean/CommonFolder;Z)Landroid/content/Intent;
+     .locals 2
+ 
+@@ -3339,6 +3410,8 @@
+ 
+     invoke-direct {p0, v1}, Lcom/alensw/ui/c/as;->a(Z)V
+ 
++    invoke-direct {p0}, Lcom/alensw/ui/c/as;->A0()V
++
+     invoke-direct {p0}, Lcom/alensw/ui/c/as;->u()V
+ 
+     iget-object v1, p0, Lcom/alensw/ui/c/as;->j:Landroid/widget/ImageView;
+@@ -4389,11 +4462,50 @@
+ 
+     goto :goto_0
+ 
++    :sswitch_2
++    iget v0, p1, Landroid/os/Message;->arg1:I
++
++    iget v1, p0, Lcom/alensw/ui/c/as;->ad:I
++
++    if-ne v0, v1, :cond_0
++
++    iget-object v0, p1, Landroid/os/Message;->obj:Ljava/lang/Object;
++
++    instance-of v1, v0, Landroid/net/Uri;
++
++    if-eqz v1, :cond_0
++
++    check-cast v0, Landroid/net/Uri;
++
++    iget-object v1, p0, Lcom/alensw/ui/c/as;->l:Lcom/alensw/bean/CommonFile;
++
++    if-eqz v1, :cond_0
++
++    invoke-virtual {v1}, Lcom/alensw/bean/CommonFile;->i()Landroid/net/Uri;
++
++    move-result-object v1
++
++    if-eqz v1, :cond_0
++
++    if-eq v1, v0, :cond_4
++
++    invoke-virtual {v1, v0}, Landroid/net/Uri;->equals(Ljava/lang/Object;)Z
++
++    move-result v1
++
++    if-eqz v1, :cond_0
++
++    :cond_4
++    invoke-direct {p0}, Lcom/alensw/ui/c/as;->u()V
++
++    goto :goto_0
++
+     nop
+ 
+     :sswitch_data_0
+     .sparse-switch
+         0x1e -> :sswitch_0
++        0x1f -> :sswitch_2
+         0xbb8 -> :sswitch_1
+     .end sparse-switch
+ .end method
+--- /dev/null
++++ decoded/smali/com/alensw/ui/c/ec.smali
+@@ -0,0 +1,76 @@
++.class public final Lcom/alensw/ui/c/ec;
++.super Ljava/lang/Object;
++
++# interfaces
++.implements Ljava/lang/Runnable;
++
++
++# instance fields
++.field private final a:Landroid/os/Handler;
++
++.field private final b:Lcom/alensw/ui/c/df;
++
++.field private final c:Landroid/net/Uri;
++
++.field private final d:I
++
++
++# direct methods
++.method public constructor <init>(Landroid/os/Handler;Lcom/alensw/ui/c/df;Landroid/net/Uri;I)V
++    .locals 0
++
++    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
++
++    iput-object p1, p0, Lcom/alensw/ui/c/ec;->a:Landroid/os/Handler;
++
++    iput-object p2, p0, Lcom/alensw/ui/c/ec;->b:Lcom/alensw/ui/c/df;
++
++    iput-object p3, p0, Lcom/alensw/ui/c/ec;->c:Landroid/net/Uri;
++
++    iput p4, p0, Lcom/alensw/ui/c/ec;->d:I
++
++    return-void
++.end method
++
++
++# virtual methods
++.method public run()V
++    .locals 6
++
++    :try_start_0
++    iget-object v0, p0, Lcom/alensw/ui/c/ec;->b:Lcom/alensw/ui/c/df;
++
++    invoke-virtual {v0}, Lcom/alensw/ui/c/df;->a()V
++    :try_end_0
++    .catch Ljava/lang/Throwable; {:try_start_0 .. :try_end_0} :catch_0
++
++    :goto_0
++    iget-object v0, p0, Lcom/alensw/ui/c/ec;->a:Landroid/os/Handler;
++
++    const/16 v1, 0x1f
++
++    iget v2, p0, Lcom/alensw/ui/c/ec;->d:I
++
++    const/4 v3, 0x0
++
++    iget-object v4, p0, Lcom/alensw/ui/c/ec;->c:Landroid/net/Uri;
++
++    invoke-virtual {v0, v1, v2, v3, v4}, Landroid/os/Handler;->obtainMessage(IIILjava/lang/Object;)Landroid/os/Message;
++
++    move-result-object v5
++
++    invoke-virtual {v5}, Landroid/os/Message;->sendToTarget()V
++
++    return-void
++
++    :catch_0
++    move-exception v0
++
++    const-string v1, "PictureInfo"
++
++    const-string v2, "load metadata: "
++
++    invoke-static {v1, v2, v0}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)I
++
++    goto :goto_0
++.end method
