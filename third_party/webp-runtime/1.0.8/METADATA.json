@@ -1,0 +1,24 @@
+{
+  "name": "webp-runtime",
+  "version": "1.0.8",
+  "source": {
+    "artifact": "com.aureusapps.android:webp-android:1.0.8",
+    "url": "https://github.com/UdaraWanasinghe/webp-android",
+    "license": "MIT"
+  },
+  "dex": {
+    "file": "classes2.dex",
+    "inputs": [
+      "webp-android-1.0.8/classes.jar",
+      "org.jetbrains.kotlin:kotlin-stdlib:1.9.24",
+      "com.getkeepsafe.relinker:relinker:1.4.5"
+    ]
+  },
+  "abi_policy": {
+    "target_abis": ["armeabi", "x86"],
+    "note": "armeabi payload is sourced from upstream armeabi-v7a binaries to preserve base APK ABI layout"
+  },
+  "verification": {
+    "sha256sums": "SHA256SUMS"
+  }
+}

@@ -48,6 +48,9 @@ Thumbs.db
 .env.*
 !.env.example
 
+# Local build caches
+.cache/
+
 # Python/Node misc caches (safe no-op if unused)
 __pycache__/
 .pytest_cache/

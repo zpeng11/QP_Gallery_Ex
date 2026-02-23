@@ -16,7 +16,7 @@ DOCKER_IMAGE ?= qp-apktool:local
 DOCKERFILE ?= Dockerfile
 DOCKER_BUILD_ARGS ?=
 
-.PHONY: check-env toolchain-bootstrap toolchain-refresh toolchain-status fetch-apk refresh-apk baseline patch-apply build sign rebuild-patched verify-patch verify-cifs-stage1 analysis analysis-refresh analysis-prune analysis-clean jadx docker-image docker-run docker-check-env docker-rebuild docker-verify docker-analysis docker-all docker-all-with-analysis docker-shell all all-with-analysis clean
+.PHONY: check-env toolchain-bootstrap toolchain-refresh toolchain-status fetch-apk refresh-apk baseline patch-apply prepare-webp-runtime inject-webp-runtime build sign rebuild-patched verify-patch verify-webp-runtime verify-cifs-stage1 analysis analysis-refresh analysis-prune analysis-clean jadx docker-image docker-run docker-check-env docker-rebuild docker-verify docker-analysis docker-all docker-all-with-analysis docker-shell all all-with-analysis clean
 
 check-env:
 	./scripts/check_system_deps.sh
@@ -56,6 +56,12 @@ baseline: fetch-apk
 patch-apply:
 	./scripts/apply_patches.sh $(PROJECT_DIR) $(PATCH_SERIES)
 
+prepare-webp-runtime:
+	./scripts/prepare_webp_runtime.sh
+
+inject-webp-runtime:
+	./scripts/inject_webp_runtime.sh $(UNSIGNED)
+
 build:
 	./scripts/build.sh $(DECODED) $(UNSIGNED)
 
@@ -70,11 +76,27 @@ verify-patch:
 	@rg -n "const-string v1, \"image/x-webp\"" $(DECODED)/smali/com/alensw/ui/c/as.smali $(DECODED)/smali/com/alensw/ui/c/dp.smali >/dev/null
 	@rg -n "const-string v0, \"image/x-webp\"" $(DECODED)/smali/com/alensw/a/at.smali >/dev/null
 	@rg -n "ImageDecoder;->createSource\\(Ljava/io/File;\\)" $(DECODED)/smali/com/alensw/b/h/r.smali >/dev/null
+	@rg -n "Lcom/alensw/b/h/t;->a\\(Lcom/alensw/b/c/f;Landroid/net/Uri;Landroid/os/Handler;\\)Lcom/alensw/b/h/t;" $(DECODED)/smali/com/alensw/a/at.smali >/dev/null
+	@rg -n "Lcom/aureusapps/android/webpandroid/decoder/WebPDecoder;" $(DECODED)/smali/com/alensw/b/h/t.smali >/dev/null
+	@rg -n "const-string v2, \"WebpRuntime\"" $(DECODED)/smali/com/alensw/b/h/t.smali >/dev/null
 	@if rg -n "AnimatedImageDrawable;->getDuration\\(\\)I" $(DECODED)/smali/com/alensw/b/h/r.smali >/dev/null; then \
 		echo "Unexpected getDuration() call found in r.smali" >&2; \
 		exit 1; \
 	fi
+	@$(MAKE) --no-print-directory verify-webp-runtime
 	@echo "Patch markers verified from $(PATCH_SERIES)"
+
+verify-webp-runtime:
+	@apk="$(SIGNED)"; \
+	if [[ ! -f "$$apk" ]]; then apk="$(UNSIGNED)"; fi; \
+	if [[ ! -f "$$apk" ]]; then \
+		echo "No rebuilt APK found. Run 'make rebuild-patched' first." >&2; \
+		exit 1; \
+	fi; \
+	unzip -l "$$apk" | rg -n "classes2.dex" >/dev/null; \
+	unzip -l "$$apk" | rg -n "lib/armeabi/libwebpcodec_jni.so" >/dev/null; \
+	unzip -l "$$apk" | rg -n "lib/x86/libwebpcodec_jni.so" >/dev/null; \
+	echo "WebP runtime payload verified in $$apk"
 
 verify-cifs-stage1:
 	@test -d $(DECODED)

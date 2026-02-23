@@ -16,6 +16,8 @@ PATCH_SERIES="${6:-$PROJECT_DIR/patches/series}"
 "$SCRIPT_DIR/prepare_baseline.sh" "$APK" "$DECODED"
 "$SCRIPT_DIR/apply_patches.sh" "$PROJECT_DIR" "$PATCH_SERIES"
 "$SCRIPT_DIR/build.sh" "$DECODED" "$UNSIGNED"
+"$SCRIPT_DIR/prepare_webp_runtime.sh"
+"$SCRIPT_DIR/inject_webp_runtime.sh" "$UNSIGNED"
 "$SCRIPT_DIR/sign.sh" "$UNSIGNED" "$ALIGNED" "$SIGNED"
 
 echo "Rebuild from patch series complete: $SIGNED"
