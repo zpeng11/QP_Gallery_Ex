@@ -1,6 +1,15 @@
---- /tmp/loading_indicator_base/decoded/smali/com/alensw/ui/c/as.smali	2026-02-23 08:32:22.202424342 -0500
-+++ ./decoded/smali/com/alensw/ui/c/as.smali	2026-02-23 08:31:16.641358755 -0500
-@@ -1329,6 +1329,8 @@
+--- /tmp/loading_indicator_base/decoded/smali/com/alensw/ui/c/as.smali	2026-02-23 09:04:59.416718529 -0500
++++ ./decoded/smali/com/alensw/ui/c/as.smali	2026-02-23 09:03:11.085969487 -0500
+@@ -438,6 +438,8 @@
+ 
+     iput-object v0, p0, Lcom/alensw/ui/c/as;->L:Lcom/alensw/a/as;
+ 
++    invoke-virtual {p0, v3}, Lcom/alensw/ui/c/as;->c(Z)V
++
+     iget-object v0, p0, Lcom/alensw/ui/c/as;->L:Lcom/alensw/a/as;
+ 
+     invoke-virtual {v0}, Lcom/alensw/a/as;->a()Lcom/alensw/b/h/j;
+@@ -1329,6 +1331,8 @@
  
      invoke-virtual {v0, v1}, Landroid/os/Handler;->removeMessages(I)V
  
@@ -9,7 +18,7 @@
      return-void
  .end method
  
-@@ -1451,6 +1453,8 @@
+@@ -1451,6 +1455,8 @@
  
      iput-object v0, p0, Lcom/alensw/ui/c/as;->L:Lcom/alensw/a/as;
  
@@ -18,7 +27,7 @@
      goto :goto_0
  .end method
  
-@@ -1673,6 +1677,10 @@
+@@ -1673,6 +1679,10 @@
  
      iput-object v0, p0, Lcom/alensw/ui/c/as;->M:Lcom/alensw/a/as;
  
@@ -29,7 +38,7 @@
      :cond_1
      return-void
  .end method
-@@ -3128,6 +3136,8 @@
+@@ -3128,6 +3138,8 @@
  
      invoke-virtual {p0, p1, v0}, Lcom/alensw/ui/c/as;->a(Lcom/alensw/b/h/j;Z)V
  
@@ -38,7 +47,7 @@
      :cond_0
      :goto_0
      iget-object v0, p0, Lcom/alensw/ui/c/as;->b:Landroid/os/Handler;
-@@ -4392,6 +4402,8 @@
+@@ -4392,6 +4404,8 @@
  
      invoke-virtual {v0, v1}, Lcom/alensw/a/ao;->b(Lcom/alensw/b/h/j;)V
  
@@ -47,9 +56,18 @@
      return-void
  .end method
  
---- /tmp/loading_indicator_base/decoded/smali/com/alensw/ui/c/dp.smali	2026-02-23 08:32:22.202424342 -0500
-+++ ./decoded/smali/com/alensw/ui/c/dp.smali	2026-02-23 08:31:23.960137477 -0500
-@@ -1474,6 +1474,8 @@
+--- /tmp/loading_indicator_base/decoded/smali/com/alensw/ui/c/dp.smali	2026-02-23 09:04:59.416718529 -0500
++++ ./decoded/smali/com/alensw/ui/c/dp.smali	2026-02-23 09:03:21.249100954 -0500
+@@ -628,6 +628,8 @@
+ 
+     iput-object v0, p0, Lcom/alensw/ui/c/dp;->M:Lcom/alensw/a/as;
+ 
++    invoke-virtual {p0, v3}, Lcom/alensw/ui/c/dp;->c(Z)V
++
+     iget-object v0, p0, Lcom/alensw/ui/c/dp;->M:Lcom/alensw/a/as;
+ 
+     invoke-virtual {v0}, Lcom/alensw/a/as;->a()Lcom/alensw/b/h/j;
+@@ -1474,6 +1476,8 @@
  
      invoke-virtual {v0, v1}, Landroid/os/Handler;->removeMessages(I)V
  
@@ -58,7 +76,7 @@
      return-void
  .end method
  
-@@ -1600,6 +1602,8 @@
+@@ -1600,6 +1604,8 @@
  
      iput-object v0, p0, Lcom/alensw/ui/c/dp;->M:Lcom/alensw/a/as;
  
@@ -67,7 +85,7 @@
      goto :goto_0
  .end method
  
-@@ -1811,6 +1815,10 @@
+@@ -1811,6 +1817,10 @@
  
      iput-object v0, p0, Lcom/alensw/ui/c/dp;->N:Lcom/alensw/a/as;
  
@@ -78,7 +96,7 @@
      :cond_1
      return-void
  .end method
-@@ -3081,6 +3089,8 @@
+@@ -3081,6 +3091,8 @@
  
      invoke-virtual {p0, p1, v0}, Lcom/alensw/ui/c/dp;->a(Lcom/alensw/b/h/j;Z)V
  
@@ -87,7 +105,7 @@
      :cond_0
      :goto_0
      iget-object v0, p0, Lcom/alensw/ui/c/dp;->b:Landroid/os/Handler;
-@@ -4385,6 +4395,8 @@
+@@ -4385,6 +4397,8 @@
  
      invoke-virtual {v0, v1}, Lcom/alensw/a/ao;->b(Lcom/alensw/b/h/j;)V
  
