@@ -29,9 +29,29 @@ Runtime payload source:
 - MIME checks support both `image/webp` and `image/x-webp`.
 - API 28+ uses `ImageDecoder` (`com/alensw/b/h/r`).
 - API < 28 uses dedicated runtime (`com/alensw/b/h/t`) backed by `webp-android` JNI.
+- API < 28 animation detection uses multi-signal probing:
+  - `decodeInfo().hasAnimation`
+  - `decodeInfo().frameCount > 1`
+  - fallback probe via `hasNextFrame()` after first-frame decode
 - API < 28 animation uses background decode + UI-thread frame consume, with real-time scheduling (drop stale frames instead of global slow playback).
 - Runtime failures automatically fall back to static decode path.
 - Runtime payload injection is deterministic and checksum-validated.
+
+## Diagnostics
+
+- Loader chain logs are emitted under `WebpMovie`:
+  - `try WebP runtime decoder (preferred)`
+  - `fallback to WebP ImageDecoder path` (API 28+ only)
+  - `fallback to static bitmap decode for WebP`
+- Runtime decoder logs are emitted under `WebpRuntime`:
+  - `decodeInfo hasAnimation=..., frameCount=..., size=...`
+  - `animation inferred by hasNextFrame`
+  - `runtime decoder reports non-animated webp after multi-signal probe`
+
+## Regression Samples
+
+- `does_animate.webp` (61 frames): expected to animate.
+- `does_not_animate.webp` (458 frames): expected to animate.
 
 ## Reproducible Workflow
 
