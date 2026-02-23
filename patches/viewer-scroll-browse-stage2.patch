@@ -1544,7 +1544,7 @@ diff -ruN /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as_scroll_anim_apply.sm
 +
 +    if-eqz v4, :cond_0
 +
-+    const/4 v5, 0x4
++    const/4 v5, 0x0
 +
 +    invoke-virtual {v4, v5}, Landroid/widget/ImageView;->setVisibility(I)V
 +
@@ -2692,7 +2692,7 @@ diff -ruN /tmp/stage1_root/decoded/smali/com/alensw/ui/c/dp_scroll_anim_apply.sm
 +
 +    if-eqz v4, :cond_0
 +
-+    const/4 v5, 0x4
++    const/4 v5, 0x0
 +
 +    invoke-virtual {v4, v5}, Landroid/widget/ImageView;->setVisibility(I)V
 +
