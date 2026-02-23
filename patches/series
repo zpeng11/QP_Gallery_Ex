@@ -3,3 +3,4 @@ saf-included-folders-stage1.patch
 slow-sd-responsive-loading.patch
 loading-indicator-progress.patch
 viewer-scroll-browse.patch
+viewer-scroll-browse-stage2.patch
