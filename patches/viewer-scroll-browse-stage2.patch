@@ -1,5 +1,5 @@
 --- /tmp/stage1_root/decoded/res/layout/viewer.xml	2026-02-23 14:05:52.486401690 -0500
-+++ decoded/res/layout/viewer.xml	2026-02-23 14:06:25.746389775 -0500
++++ decoded/res/layout/viewer.xml	2026-02-23 14:57:16.537543193 -0500
 @@ -2,6 +2,7 @@
  <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
    xmlns:android="http://schemas.android.com/apk/res/android">
@@ -16,8 +16,8 @@
 \ No newline at end of file
 +</RelativeLayout>
 --- /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as.smali	2026-02-23 14:06:02.810398003 -0500
-+++ decoded/smali/com/alensw/ui/c/as.smali	2026-02-23 14:06:25.746389775 -0500
-@@ -329,6 +329,136 @@
++++ decoded/smali/com/alensw/ui/c/as.smali	2026-02-23 15:11:58.117320021 -0500
+@@ -329,6 +329,140 @@
      return-void
  .end method
  
@@ -136,6 +136,8 @@
 +    :cond_5
 +    invoke-virtual {v0, v3}, Landroid/widget/ListView;->setSelection(I)V
 +
++    invoke-static {v3}, Lcom/alensw/ui/c/viewer_scroll_loader;->b(I)V
++
 +    goto :cond_8
 +
 +    :cond_7
@@ -144,6 +146,8 @@
 +    if-eqz v1, :cond_8
 +
 +    invoke-virtual {v0, v6}, Landroid/widget/ListView;->setSelection(I)V
++
++    invoke-static {v6}, Lcom/alensw/ui/c/viewer_scroll_loader;->b(I)V
 +
 +    :cond_8
 +    invoke-virtual {p0}, Lcom/alensw/ui/c/as;->B1()V
@@ -154,7 +158,7 @@
  .method public static a(Lcom/alensw/bean/CommonFolder;Z)Landroid/content/Intent;
      .locals 2
  
-@@ -2263,6 +2393,163 @@
+@@ -2263,6 +2397,163 @@
      return-wide v2
  .end method
  
@@ -318,7 +322,7 @@
  .method public a()V
      .locals 8
      .annotation build Landroid/annotation/TargetApi;
-@@ -3100,6 +3387,8 @@
+@@ -3100,6 +3391,8 @@
  
      invoke-virtual {v0, v8}, Landroid/view/View;->setVisibility(I)V
  
@@ -328,8 +332,8 @@
  
      :cond_4
 --- /tmp/stage1_root/decoded/smali/com/alensw/ui/c/dp.smali	2026-02-23 14:06:02.810398003 -0500
-+++ decoded/smali/com/alensw/ui/c/dp.smali	2026-02-23 14:06:25.746389775 -0500
-@@ -525,6 +525,136 @@
++++ decoded/smali/com/alensw/ui/c/dp.smali	2026-02-23 15:12:05.933317868 -0500
+@@ -525,6 +525,140 @@
      return-void
  .end method
  
@@ -448,6 +452,8 @@
 +    :cond_5
 +    invoke-virtual {v0, v3}, Landroid/widget/ListView;->setSelection(I)V
 +
++    invoke-static {v3}, Lcom/alensw/ui/c/viewer_scroll_loader;->b(I)V
++
 +    goto :cond_8
 +
 +    :cond_7
@@ -456,6 +462,8 @@
 +    if-eqz v1, :cond_8
 +
 +    invoke-virtual {v0, v6}, Landroid/widget/ListView;->setSelection(I)V
++
++    invoke-static {v6}, Lcom/alensw/ui/c/viewer_scroll_loader;->b(I)V
 +
 +    :cond_8
 +    invoke-virtual {p0}, Lcom/alensw/ui/c/dp;->O0()V
@@ -466,7 +474,7 @@
  .method static synthetic a(Lcom/alensw/ui/c/dp;C)C
      .locals 0
  
-@@ -2072,6 +2202,171 @@
+@@ -2072,6 +2206,171 @@
      return-void
  .end method
  
@@ -638,7 +646,7 @@
  
  # virtual methods
  .method protected a(IZ)I
-@@ -3071,6 +3366,8 @@
+@@ -3071,6 +3370,8 @@
  
      invoke-static {v0, v1}, Lcom/alensw/ui/activity/ao;->a(Landroid/widget/ImageView;Landroid/graphics/drawable/shapes/Shape;)V
  
@@ -648,7 +656,7 @@
  .end method
  
 --- /dev/null	2026-02-23 07:45:39.059542164 -0500
-+++ decoded/smali/com/alensw/ui/c/as_scroll_touch.smali	2026-02-23 14:06:25.746389775 -0500
++++ decoded/smali/com/alensw/ui/c/as_scroll_touch.smali	2026-02-23 14:57:16.537543193 -0500
 @@ -0,0 +1,52 @@
 +.class Lcom/alensw/ui/c/as_scroll_touch;
 +.super Ljava/lang/Object;
@@ -703,7 +711,7 @@
 +    return v0
 +.end method
 --- /dev/null	2026-02-23 07:45:39.059542164 -0500
-+++ decoded/smali/com/alensw/ui/c/dp_scroll_touch.smali	2026-02-23 14:06:25.746389775 -0500
++++ decoded/smali/com/alensw/ui/c/dp_scroll_touch.smali	2026-02-23 14:57:16.537543193 -0500
 @@ -0,0 +1,52 @@
 +.class Lcom/alensw/ui/c/dp_scroll_touch;
 +.super Ljava/lang/Object;
@@ -758,8 +766,8 @@
 +    return v0
 +.end method
 --- /dev/null	2026-02-23 07:45:39.059542164 -0500
-+++ decoded/smali/com/alensw/ui/c/as_scroll_listener.smali	2026-02-23 14:06:25.750389772 -0500
-@@ -0,0 +1,42 @@
++++ decoded/smali/com/alensw/ui/c/as_scroll_listener.smali	2026-02-23 15:11:19.489331558 -0500
+@@ -0,0 +1,51 @@
 +.class Lcom/alensw/ui/c/as_scroll_listener;
 +.super Ljava/lang/Object;
 +
@@ -785,8 +793,17 @@
 +
 +# virtual methods
 +.method public onScroll(Landroid/widget/AbsListView;III)V
-+    .locals 0
++    .locals 1
 +
++    if-lez p3, :cond_0
++
++    div-int/lit8 v0, p3, 0x2
++
++    add-int/2addr v0, p2
++
++    invoke-static {v0}, Lcom/alensw/ui/c/viewer_scroll_loader;->b(I)V
++
++    :cond_0
 +    return-void
 +.end method
 +
@@ -803,8 +820,8 @@
 +    return-void
 +.end method
 --- /dev/null	2026-02-23 07:45:39.059542164 -0500
-+++ decoded/smali/com/alensw/ui/c/dp_scroll_listener.smali	2026-02-23 14:06:25.750389772 -0500
-@@ -0,0 +1,42 @@
++++ decoded/smali/com/alensw/ui/c/dp_scroll_listener.smali	2026-02-23 15:11:31.581327063 -0500
+@@ -0,0 +1,51 @@
 +.class Lcom/alensw/ui/c/dp_scroll_listener;
 +.super Ljava/lang/Object;
 +
@@ -830,8 +847,17 @@
 +
 +# virtual methods
 +.method public onScroll(Landroid/widget/AbsListView;III)V
-+    .locals 0
++    .locals 1
 +
++    if-lez p3, :cond_0
++
++    div-int/lit8 v0, p3, 0x2
++
++    add-int/2addr v0, p2
++
++    invoke-static {v0}, Lcom/alensw/ui/c/viewer_scroll_loader;->b(I)V
++
++    :cond_0
 +    return-void
 +.end method
 +
@@ -848,7 +874,7 @@
 +    return-void
 +.end method
 --- /dev/null	2026-02-23 07:45:39.059542164 -0500
-+++ decoded/smali/com/alensw/ui/c/as_scroll_adapter.smali	2026-02-23 14:41:24.321787770 -0500
++++ decoded/smali/com/alensw/ui/c/as_scroll_adapter.smali	2026-02-23 15:11:40.709324835 -0500
 @@ -0,0 +1,175 @@
 +.class Lcom/alensw/ui/c/as_scroll_adapter;
 +.super Landroid/widget/BaseAdapter;
@@ -1021,12 +1047,12 @@
 +
 +    iget-object v2, v2, Lcom/alensw/ui/c/as;->C:Lcom/alensw/ui/c/cx;
 +
-+    invoke-static {v2, p2, v0}, Lcom/alensw/ui/c/viewer_scroll_loader;->a(Landroid/content/Context;Landroid/widget/ImageView;Landroid/net/Uri;)V
++    invoke-static {v2, p2, v0, p1}, Lcom/alensw/ui/c/viewer_scroll_loader;->a(Landroid/content/Context;Landroid/widget/ImageView;Landroid/net/Uri;I)V
 +
 +    return-object p2
 +.end method
 --- /dev/null	2026-02-23 07:45:39.059542164 -0500
-+++ decoded/smali/com/alensw/ui/c/dp_scroll_adapter.smali	2026-02-23 14:41:33.781785843 -0500
++++ decoded/smali/com/alensw/ui/c/dp_scroll_adapter.smali	2026-02-23 15:11:47.957322969 -0500
 @@ -0,0 +1,163 @@
 +.class Lcom/alensw/ui/c/dp_scroll_adapter;
 +.super Landroid/widget/BaseAdapter;
@@ -1187,13 +1213,13 @@
 +
 +    iget-object v2, v2, Lcom/alensw/ui/c/dp;->C:Lcom/alensw/ui/c/cx;
 +
-+    invoke-static {v2, p2, v0}, Lcom/alensw/ui/c/viewer_scroll_loader;->a(Landroid/content/Context;Landroid/widget/ImageView;Landroid/net/Uri;)V
++    invoke-static {v2, p2, v0, p1}, Lcom/alensw/ui/c/viewer_scroll_loader;->a(Landroid/content/Context;Landroid/widget/ImageView;Landroid/net/Uri;I)V
 +
 +    return-object p2
 +.end method
 --- /dev/null	2026-02-23 07:45:39.059542164 -0500
-+++ decoded/smali/com/alensw/ui/c/viewer_scroll_loader.smali	2026-02-23 14:40:37.565799393 -0500
-@@ -0,0 +1,72 @@
++++ decoded/smali/com/alensw/ui/c/viewer_scroll_loader.smali	2026-02-23 15:12:53.889304905 -0500
+@@ -0,0 +1,333 @@
 +.class public final Lcom/alensw/ui/c/viewer_scroll_loader;
 +.super Ljava/lang/Object;
 +
@@ -1201,10 +1227,18 @@
 +# static fields
 +.field private static final a:Ljava/util/concurrent/ExecutorService;
 +
++.field private static final b:Landroid/util/LruCache;
++
++.field private static final c:Landroid/util/LruCache;
++
++.field private static final d:Ljava/util/concurrent/ConcurrentHashMap;
++
++.field private static volatile e:I
++
 +
 +# direct methods
 +.method static constructor <clinit>()V
-+    .locals 1
++    .locals 2
 +
 +    const/4 v0, 0x2
 +
@@ -1213,6 +1247,32 @@
 +    move-result-object v0
 +
 +    sput-object v0, Lcom/alensw/ui/c/viewer_scroll_loader;->a:Ljava/util/concurrent/ExecutorService;
++
++    new-instance v0, Landroid/util/LruCache;
++
++    const/16 v1, 0x30
++
++    invoke-direct {v0, v1}, Landroid/util/LruCache;-><init>(I)V
++
++    sput-object v0, Lcom/alensw/ui/c/viewer_scroll_loader;->b:Landroid/util/LruCache;
++
++    new-instance v0, Landroid/util/LruCache;
++
++    const/16 v1, 0xf0
++
++    invoke-direct {v0, v1}, Landroid/util/LruCache;-><init>(I)V
++
++    sput-object v0, Lcom/alensw/ui/c/viewer_scroll_loader;->c:Landroid/util/LruCache;
++
++    new-instance v0, Ljava/util/concurrent/ConcurrentHashMap;
++
++    invoke-direct {v0}, Ljava/util/concurrent/ConcurrentHashMap;-><init>()V
++
++    sput-object v0, Lcom/alensw/ui/c/viewer_scroll_loader;->d:Ljava/util/concurrent/ConcurrentHashMap;
++
++    const/4 v0, -0x1
++
++    sput v0, Lcom/alensw/ui/c/viewer_scroll_loader;->e:I
 +
 +    return-void
 +.end method
@@ -1225,10 +1285,10 @@
 +    return-void
 +.end method
 +
-+.method public static a(Landroid/content/Context;Landroid/widget/ImageView;Landroid/net/Uri;)V
-+    .locals 3
++.method public static a(Landroid/content/Context;Landroid/widget/ImageView;Landroid/net/Uri;I)V
++    .locals 11
 +
-+    if-eqz p1, :cond_2
++    if-eqz p1, :cond_a
 +
 +    if-nez p2, :cond_0
 +
@@ -1241,34 +1301,261 @@
 +    return-void
 +
 +    :cond_0
-+    invoke-virtual {p1, p2}, Landroid/widget/ImageView;->setTag(Ljava/lang/Object;)V
-+
-+    new-instance v0, Landroid/graphics/drawable/ColorDrawable;
-+
-+    const v1, -0xddddde
-+
-+    invoke-direct {v0, v1}, Landroid/graphics/drawable/ColorDrawable;-><init>(I)V
-+
-+    invoke-virtual {p1, v0}, Landroid/widget/ImageView;->setImageDrawable(Landroid/graphics/drawable/Drawable;)V
-+
-+    invoke-virtual {p0}, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
++    invoke-virtual {p1}, Landroid/widget/ImageView;->getTag()Ljava/lang/Object;
 +
 +    move-result-object v0
 +
-+    new-instance v1, Lcom/alensw/ui/c/viewer_scroll_load_task;
++    const/4 v1, 0x0
 +
-+    invoke-direct {v1, v0, p1, p2}, Lcom/alensw/ui/c/viewer_scroll_load_task;-><init>(Landroid/content/Context;Landroid/widget/ImageView;Landroid/net/Uri;)V
++    instance-of v2, v0, Landroid/net/Uri;
 +
-+    sget-object v2, Lcom/alensw/ui/c/viewer_scroll_loader;->a:Ljava/util/concurrent/ExecutorService;
++    if-eqz v2, :cond_1
 +
-+    invoke-interface {v2, v1}, Ljava/util/concurrent/ExecutorService;->execute(Ljava/lang/Runnable;)V
++    check-cast v0, Landroid/net/Uri;
++
++    invoke-virtual {v0, p2}, Ljava/lang/Object;->equals(Ljava/lang/Object;)Z
++
++    move-result v1
++
++    :cond_1
++    invoke-virtual {p1, p2}, Landroid/widget/ImageView;->setTag(Ljava/lang/Object;)V
++
++    invoke-virtual {p2}, Landroid/net/Uri;->toString()Ljava/lang/String;
++
++    move-result-object v2
++
++    if-nez v2, :cond_2
++
++    return-void
++
++    :cond_2
++    invoke-static {v2}, Lcom/alensw/ui/c/viewer_scroll_loader;->e(Ljava/lang/String;)Landroid/graphics/Bitmap;
++
++    move-result-object v3
++
++    if-eqz v3, :cond_3
++
++    invoke-virtual {p1, v3}, Landroid/widget/ImageView;->setImageBitmap(Landroid/graphics/Bitmap;)V
++
++    return-void
++
++    :cond_3
++    invoke-static {v2}, Lcom/alensw/ui/c/viewer_scroll_loader;->f(Ljava/lang/String;)Landroid/graphics/Bitmap;
++
++    move-result-object v4
++
++    if-eqz v4, :cond_4
++
++    invoke-virtual {p1, v4}, Landroid/widget/ImageView;->setImageBitmap(Landroid/graphics/Bitmap;)V
++
++    goto :cond_5
++
++    :cond_4
++    if-nez v1, :cond_5
++
++    new-instance v5, Landroid/graphics/drawable/ColorDrawable;
++
++    const v6, -0xddddde
++
++    invoke-direct {v5, v6}, Landroid/graphics/drawable/ColorDrawable;-><init>(I)V
++
++    invoke-virtual {p1, v5}, Landroid/widget/ImageView;->setImageDrawable(Landroid/graphics/drawable/Drawable;)V
++
++    :cond_5
++    const/4 v5, 0x1
++
++    sget v6, Lcom/alensw/ui/c/viewer_scroll_loader;->e:I
++
++    if-ltz v6, :cond_7
++
++    sub-int v7, p3, v6
++
++    invoke-static {v7}, Ljava/lang/Math;->abs(I)I
++
++    move-result v7
++
++    const/16 v8, 0x18
++
++    if-gt v7, v8, :cond_6
++
++    const/4 v5, 0x2
++
++    :cond_6
++    nop
++
++    :cond_7
++    const/4 v8, 0x1
++
++    if-ne v5, v8, :cond_8
++
++    if-eqz v4, :cond_8
++
++    return-void
++
++    :cond_8
++    invoke-static {v2, v5}, Lcom/alensw/ui/c/viewer_scroll_loader;->g(Ljava/lang/String;I)Z
++
++    move-result v9
++
++    if-eqz v9, :cond_a
++
++    invoke-virtual {p0}, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
++
++    move-result-object v10
++
++    invoke-static {v10, p1, p2, v2, v5}, Lcom/alensw/ui/c/viewer_scroll_loader;->h(Landroid/content/Context;Landroid/widget/ImageView;Landroid/net/Uri;Ljava/lang/String;I)V
++
++    :cond_a
++    return-void
++.end method
++
++.method public static b(I)V
++    .locals 0
++
++    sput p0, Lcom/alensw/ui/c/viewer_scroll_loader;->e:I
++
++    return-void
++.end method
++
++.method public static d(Ljava/lang/String;Landroid/graphics/Bitmap;I)V
++    .locals 2
++
++    if-eqz p1, :cond_2
++
++    const/4 v0, 0x2
++
++    if-ne p2, v0, :cond_0
++
++    sget-object v1, Lcom/alensw/ui/c/viewer_scroll_loader;->b:Landroid/util/LruCache;
++
++    invoke-virtual {v1, p0, p1}, Landroid/util/LruCache;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
++
++    goto :cond_2
++
++    :cond_0
++    sget-object v1, Lcom/alensw/ui/c/viewer_scroll_loader;->c:Landroid/util/LruCache;
++
++    invoke-virtual {v1, p0, p1}, Landroid/util/LruCache;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 +
 +    :cond_2
 +    return-void
 +.end method
++
++.method public static e(Ljava/lang/String;)Landroid/graphics/Bitmap;
++    .locals 2
++
++    sget-object v0, Lcom/alensw/ui/c/viewer_scroll_loader;->b:Landroid/util/LruCache;
++
++    invoke-virtual {v0, p0}, Landroid/util/LruCache;->get(Ljava/lang/Object;)Ljava/lang/Object;
++
++    move-result-object v1
++
++    check-cast v1, Landroid/graphics/Bitmap;
++
++    return-object v1
++.end method
++
++.method public static f(Ljava/lang/String;)Landroid/graphics/Bitmap;
++    .locals 2
++
++    sget-object v0, Lcom/alensw/ui/c/viewer_scroll_loader;->c:Landroid/util/LruCache;
++
++    invoke-virtual {v0, p0}, Landroid/util/LruCache;->get(Ljava/lang/Object;)Ljava/lang/Object;
++
++    move-result-object v1
++
++    check-cast v1, Landroid/graphics/Bitmap;
++
++    return-object v1
++.end method
++
++.method public static g(Ljava/lang/String;I)Z
++    .locals 4
++
++    if-nez p0, :cond_0
++
++    const/4 v0, 0x0
++
++    return v0
++
++    :cond_0
++    sget-object v0, Lcom/alensw/ui/c/viewer_scroll_loader;->d:Ljava/util/concurrent/ConcurrentHashMap;
++
++    invoke-virtual {v0, p0}, Ljava/util/concurrent/ConcurrentHashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
++
++    move-result-object v1
++
++    check-cast v1, Ljava/lang/Integer;
++
++    if-eqz v1, :cond_1
++
++    invoke-virtual {v1}, Ljava/lang/Integer;->intValue()I
++
++    move-result v2
++
++    if-lt v2, p1, :cond_1
++
++    const/4 v3, 0x0
++
++    return v3
++
++    :cond_1
++    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
++
++    move-result-object v2
++
++    invoke-virtual {v0, p0, v2}, Ljava/util/concurrent/ConcurrentHashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
++
++    const/4 v3, 0x1
++
++    return v3
++.end method
++
++.method private static h(Landroid/content/Context;Landroid/widget/ImageView;Landroid/net/Uri;Ljava/lang/String;I)V
++    .locals 6
++
++    new-instance v0, Lcom/alensw/ui/c/viewer_scroll_load_task;
++
++    move-object v1, p0
++
++    move-object v2, p1
++
++    move-object v3, p2
++
++    move-object v4, p3
++
++    move v5, p4
++
++    invoke-direct/range {v0 .. v5}, Lcom/alensw/ui/c/viewer_scroll_load_task;-><init>(Landroid/content/Context;Landroid/widget/ImageView;Landroid/net/Uri;Ljava/lang/String;I)V
++
++    sget-object v1, Lcom/alensw/ui/c/viewer_scroll_loader;->a:Ljava/util/concurrent/ExecutorService;
++
++    invoke-interface {v1, v0}, Ljava/util/concurrent/ExecutorService;->execute(Ljava/lang/Runnable;)V
++
++    return-void
++.end method
++
++.method public static i(Ljava/lang/String;I)V
++    .locals 3
++
++    if-nez p0, :cond_0
++
++    return-void
++
++    :cond_0
++    sget-object v0, Lcom/alensw/ui/c/viewer_scroll_loader;->d:Ljava/util/concurrent/ConcurrentHashMap;
++
++    invoke-static {p1}, Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
++
++    move-result-object v1
++
++    invoke-virtual {v0, p0, v1}, Ljava/util/concurrent/ConcurrentHashMap;->remove(Ljava/lang/Object;Ljava/lang/Object;)Z
++
++    return-void
++.end method
 --- /dev/null	2026-02-23 07:45:39.059542164 -0500
-+++ decoded/smali/com/alensw/ui/c/viewer_scroll_load_task.smali	2026-02-23 14:41:01.085793042 -0500
-@@ -0,0 +1,130 @@
++++ decoded/smali/com/alensw/ui/c/viewer_scroll_load_task.smali	2026-02-23 15:10:48.549340055 -0500
+@@ -0,0 +1,176 @@
 +.class final Lcom/alensw/ui/c/viewer_scroll_load_task;
 +.super Ljava/lang/Object;
 +
@@ -1283,9 +1570,13 @@
 +
 +.field private final c:Landroid/net/Uri;
 +
++.field private final d:Ljava/lang/String;
++
++.field private final e:I
++
 +
 +# direct methods
-+.method constructor <init>(Landroid/content/Context;Landroid/widget/ImageView;Landroid/net/Uri;)V
++.method constructor <init>(Landroid/content/Context;Landroid/widget/ImageView;Landroid/net/Uri;Ljava/lang/String;I)V
 +    .locals 1
 +
 +    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -1300,17 +1591,25 @@
 +
 +    iput-object p3, p0, Lcom/alensw/ui/c/viewer_scroll_load_task;->c:Landroid/net/Uri;
 +
++    iput-object p4, p0, Lcom/alensw/ui/c/viewer_scroll_load_task;->d:Ljava/lang/String;
++
++    iput p5, p0, Lcom/alensw/ui/c/viewer_scroll_load_task;->e:I
++
 +    return-void
 +.end method
 +
 +
 +# virtual methods
 +.method public run()V
-+    .locals 8
++    .locals 10
 +
 +    const/4 v0, 0x0
 +
 +    :try_start_0
++    const/16 v1, 0xa
++
++    invoke-static {v1}, Landroid/os/Process;->setThreadPriority(I)V
++
 +    iget-object v1, p0, Lcom/alensw/ui/c/viewer_scroll_load_task;->a:Ljava/lang/ref/WeakReference;
 +
 +    invoke-virtual {v1}, Ljava/lang/ref/WeakReference;->get()Ljava/lang/Object;
@@ -1319,7 +1618,7 @@
 +
 +    check-cast v1, Landroid/widget/ImageView;
 +
-+    if-eqz v1, :cond_4
++    if-eqz v1, :cond_5
 +
 +    iget-object v2, p0, Lcom/alensw/ui/c/viewer_scroll_load_task;->b:Landroid/content/Context;
 +
@@ -1333,7 +1632,7 @@
 +
 +    move-result-object v0
 +
-+    if-eqz v0, :cond_4
++    if-eqz v0, :cond_5
 +
 +    new-instance v2, Landroid/graphics/BitmapFactory$Options;
 +
@@ -1347,49 +1646,77 @@
 +
 +    iput-boolean v3, v2, Landroid/graphics/BitmapFactory$Options;->inDither:Z
 +
-+    const/4 v3, 0x2
++    iget v3, p0, Lcom/alensw/ui/c/viewer_scroll_load_task;->e:I
 +
-+    iput v3, v2, Landroid/graphics/BitmapFactory$Options;->inSampleSize:I
++    const/4 v4, 0x2
 +
-+    const/4 v3, 0x0
++    if-ne v3, v4, :cond_0
 +
-+    invoke-static {v0, v3, v2}, Landroid/graphics/BitmapFactory;->decodeStream(Ljava/io/InputStream;Landroid/graphics/Rect;Landroid/graphics/BitmapFactory$Options;)Landroid/graphics/Bitmap;
++    const/4 v5, 0x2
 +
-+    move-result-object v2
++    goto :goto_0
++
++    :cond_0
++    const/16 v5, 0x8
++
++    :goto_0
++    iput v5, v2, Landroid/graphics/BitmapFactory$Options;->inSampleSize:I
++
++    const/4 v6, 0x0
++
++    invoke-static {v0, v6, v2}, Landroid/graphics/BitmapFactory;->decodeStream(Ljava/io/InputStream;Landroid/graphics/Rect;Landroid/graphics/BitmapFactory$Options;)Landroid/graphics/Bitmap;
++
++    move-result-object v7
 +
 +    invoke-static {v0}, Lcom/alensw/b/e/b;->a(Ljava/io/Closeable;)V
 +
 +    const/4 v0, 0x0
 +
-+    if-eqz v2, :cond_4
++    if-eqz v7, :cond_5
++
++    iget-object v8, p0, Lcom/alensw/ui/c/viewer_scroll_load_task;->d:Ljava/lang/String;
++
++    iget v9, p0, Lcom/alensw/ui/c/viewer_scroll_load_task;->e:I
++
++    invoke-static {v8, v7, v9}, Lcom/alensw/ui/c/viewer_scroll_loader;->d(Ljava/lang/String;Landroid/graphics/Bitmap;I)V
 +
 +    invoke-virtual {v1}, Landroid/widget/ImageView;->getTag()Ljava/lang/Object;
 +
-+    move-result-object v3
++    move-result-object v2
 +
-+    if-eqz v3, :cond_4
++    if-eqz v2, :cond_5
++
++    iget-object v3, p0, Lcom/alensw/ui/c/viewer_scroll_load_task;->c:Landroid/net/Uri;
++
++    invoke-virtual {v2, v3}, Ljava/lang/Object;->equals(Ljava/lang/Object;)Z
++
++    move-result v2
++
++    if-eqz v2, :cond_5
++
++    new-instance v2, Lcom/alensw/ui/c/viewer_scroll_apply;
++
++    iget-object v3, p0, Lcom/alensw/ui/c/viewer_scroll_load_task;->a:Ljava/lang/ref/WeakReference;
 +
 +    iget-object v4, p0, Lcom/alensw/ui/c/viewer_scroll_load_task;->c:Landroid/net/Uri;
 +
-+    invoke-virtual {v3, v4}, Ljava/lang/Object;->equals(Ljava/lang/Object;)Z
++    iget-object v5, p0, Lcom/alensw/ui/c/viewer_scroll_load_task;->d:Ljava/lang/String;
 +
-+    move-result v3
++    iget v6, p0, Lcom/alensw/ui/c/viewer_scroll_load_task;->e:I
 +
-+    if-eqz v3, :cond_4
++    invoke-direct/range {v2 .. v7}, Lcom/alensw/ui/c/viewer_scroll_apply;-><init>(Ljava/lang/ref/WeakReference;Landroid/net/Uri;Ljava/lang/String;ILandroid/graphics/Bitmap;)V
 +
-+    new-instance v3, Lcom/alensw/ui/c/viewer_scroll_apply;
-+
-+    iget-object v4, p0, Lcom/alensw/ui/c/viewer_scroll_load_task;->a:Ljava/lang/ref/WeakReference;
-+
-+    iget-object v5, p0, Lcom/alensw/ui/c/viewer_scroll_load_task;->c:Landroid/net/Uri;
-+
-+    invoke-direct {v3, v4, v5, v2}, Lcom/alensw/ui/c/viewer_scroll_apply;-><init>(Ljava/lang/ref/WeakReference;Landroid/net/Uri;Landroid/graphics/Bitmap;)V
-+
-+    invoke-virtual {v1, v3}, Landroid/widget/ImageView;->post(Ljava/lang/Runnable;)Z
++    invoke-virtual {v1, v2}, Landroid/widget/ImageView;->post(Ljava/lang/Runnable;)Z
 +    :try_end_0
 +    .catch Ljava/lang/Throwable; {:try_start_0 .. :try_end_0} :catch_0
 +
-+    :cond_4
++    :cond_5
++    iget-object v1, p0, Lcom/alensw/ui/c/viewer_scroll_load_task;->d:Ljava/lang/String;
++
++    iget v2, p0, Lcom/alensw/ui/c/viewer_scroll_load_task;->e:I
++
++    invoke-static {v1, v2}, Lcom/alensw/ui/c/viewer_scroll_loader;->i(Ljava/lang/String;I)V
++
 +    return-void
 +
 +    :catch_0
@@ -1397,11 +1724,17 @@
 +
 +    invoke-static {v0}, Lcom/alensw/b/e/b;->a(Ljava/io/Closeable;)V
 +
++    iget-object v2, p0, Lcom/alensw/ui/c/viewer_scroll_load_task;->d:Ljava/lang/String;
++
++    iget v3, p0, Lcom/alensw/ui/c/viewer_scroll_load_task;->e:I
++
++    invoke-static {v2, v3}, Lcom/alensw/ui/c/viewer_scroll_loader;->i(Ljava/lang/String;I)V
++
 +    return-void
 +.end method
 --- /dev/null	2026-02-23 07:45:39.059542164 -0500
-+++ decoded/smali/com/alensw/ui/c/viewer_scroll_apply.smali	2026-02-23 14:41:14.333790677 -0500
-@@ -0,0 +1,66 @@
++++ decoded/smali/com/alensw/ui/c/viewer_scroll_apply.smali	2026-02-23 15:11:07.317334848 -0500
+@@ -0,0 +1,93 @@
 +.class final Lcom/alensw/ui/c/viewer_scroll_apply;
 +.super Ljava/lang/Object;
 +
@@ -1414,11 +1747,15 @@
 +
 +.field private final b:Landroid/net/Uri;
 +
-+.field private final c:Landroid/graphics/Bitmap;
++.field private final c:Ljava/lang/String;
++
++.field private final d:I
++
++.field private final e:Landroid/graphics/Bitmap;
 +
 +
 +# direct methods
-+.method constructor <init>(Ljava/lang/ref/WeakReference;Landroid/net/Uri;Landroid/graphics/Bitmap;)V
++.method constructor <init>(Ljava/lang/ref/WeakReference;Landroid/net/Uri;Ljava/lang/String;ILandroid/graphics/Bitmap;)V
 +    .locals 0
 +
 +    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
@@ -1427,7 +1764,11 @@
 +
 +    iput-object p2, p0, Lcom/alensw/ui/c/viewer_scroll_apply;->b:Landroid/net/Uri;
 +
-+    iput-object p3, p0, Lcom/alensw/ui/c/viewer_scroll_apply;->c:Landroid/graphics/Bitmap;
++    iput-object p3, p0, Lcom/alensw/ui/c/viewer_scroll_apply;->c:Ljava/lang/String;
++
++    iput p4, p0, Lcom/alensw/ui/c/viewer_scroll_apply;->d:I
++
++    iput-object p5, p0, Lcom/alensw/ui/c/viewer_scroll_apply;->e:Landroid/graphics/Bitmap;
 +
 +    return-void
 +.end method
@@ -1435,7 +1776,7 @@
 +
 +# virtual methods
 +.method public run()V
-+    .locals 4
++    .locals 5
 +
 +    iget-object v0, p0, Lcom/alensw/ui/c/viewer_scroll_apply;->a:Ljava/lang/ref/WeakReference;
 +
@@ -1445,13 +1786,13 @@
 +
 +    check-cast v0, Landroid/widget/ImageView;
 +
-+    if-eqz v0, :cond_1
++    if-eqz v0, :cond_2
 +
 +    invoke-virtual {v0}, Landroid/widget/ImageView;->getTag()Ljava/lang/Object;
 +
 +    move-result-object v1
 +
-+    if-eqz v1, :cond_1
++    if-eqz v1, :cond_2
 +
 +    iget-object v2, p0, Lcom/alensw/ui/c/viewer_scroll_apply;->b:Landroid/net/Uri;
 +
@@ -1459,12 +1800,31 @@
 +
 +    move-result v1
 +
-+    if-eqz v1, :cond_1
++    if-eqz v1, :cond_2
 +
-+    iget-object v3, p0, Lcom/alensw/ui/c/viewer_scroll_apply;->c:Landroid/graphics/Bitmap;
++    iget v1, p0, Lcom/alensw/ui/c/viewer_scroll_apply;->d:I
 +
-+    invoke-virtual {v0, v3}, Landroid/widget/ImageView;->setImageBitmap(Landroid/graphics/Bitmap;)V
++    const/4 v2, 0x1
++
++    if-ne v1, v2, :cond_1
++
++    iget-object v3, p0, Lcom/alensw/ui/c/viewer_scroll_apply;->c:Ljava/lang/String;
++
++    invoke-static {v3}, Lcom/alensw/ui/c/viewer_scroll_loader;->e(Ljava/lang/String;)Landroid/graphics/Bitmap;
++
++    move-result-object v4
++
++    if-eqz v4, :cond_1
++
++    invoke-virtual {v0, v4}, Landroid/widget/ImageView;->setImageBitmap(Landroid/graphics/Bitmap;)V
++
++    return-void
 +
 +    :cond_1
++    iget-object v4, p0, Lcom/alensw/ui/c/viewer_scroll_apply;->e:Landroid/graphics/Bitmap;
++
++    invoke-virtual {v0, v4}, Landroid/widget/ImageView;->setImageBitmap(Landroid/graphics/Bitmap;)V
++
++    :cond_2
 +    return-void
 +.end method
