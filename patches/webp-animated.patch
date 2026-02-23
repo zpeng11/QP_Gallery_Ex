@@ -1,5 +1,5 @@
---- /tmp/webp_clean_root/decoded/smali/com/alensw/ui/c/as.smali	2026-02-23 02:54:21.241476217 -0500
-+++ ./decoded/smali/com/alensw/ui/c/as.smali	2026-02-23 02:49:30.805525127 -0500
+--- /tmp/webp_clean_root/decoded/smali/com/alensw/ui/c/as.smali	2026-02-23 03:00:28.577419241 -0500
++++ ./decoded/smali/com/alensw/ui/c/as.smali	2026-02-23 02:54:54.309469806 -0500
 @@ -1577,14 +1577,30 @@
      if-eq v1, v0, :cond_1
  
@@ -33,8 +33,8 @@
      invoke-virtual {v1, v2}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
  
      move-result v1
---- /tmp/webp_clean_root/decoded/smali/com/alensw/ui/c/dp.smali	2026-02-23 02:54:21.241476217 -0500
-+++ ./decoded/smali/com/alensw/ui/c/dp.smali	2026-02-23 02:49:30.829525127 -0500
+--- /tmp/webp_clean_root/decoded/smali/com/alensw/ui/c/dp.smali	2026-02-23 03:00:28.573419243 -0500
++++ ./decoded/smali/com/alensw/ui/c/dp.smali	2026-02-23 02:54:54.309469806 -0500
 @@ -1729,6 +1729,22 @@
  
      move-result v1
@@ -58,8 +58,8 @@
      if-eqz v1, :cond_1
  
      :cond_0
---- /tmp/webp_clean_root/decoded/smali/com/alensw/a/at.smali	2026-02-23 02:54:20.837476265 -0500
-+++ ./decoded/smali/com/alensw/a/at.smali	2026-02-23 02:49:30.805525127 -0500
+--- /tmp/webp_clean_root/decoded/smali/com/alensw/a/at.smali	2026-02-23 03:00:28.121419298 -0500
++++ ./decoded/smali/com/alensw/a/at.smali	2026-02-23 02:59:31.705425847 -0500
 @@ -318,6 +318,110 @@
  
      iput-object v15, v8, Lcom/alensw/b/h/a;->outMimeType:Ljava/lang/String;
@@ -180,7 +180,7 @@
  
      const/4 v4, 0x0
  
-@@ -840,6 +944,140 @@
+@@ -840,6 +944,92 @@
      return-object v0
  
      :cond_1
@@ -230,54 +230,6 @@
 +
 +    const-string v0, "WebpMovie"
 +
-+    new-instance v5, Ljava/lang/StringBuilder;
-+
-+    invoke-direct {v5}, Ljava/lang/StringBuilder;-><init>()V
-+
-+    const-string v6, "webp candidate path="
-+
-+    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-+
-+    move-result-object v5
-+
-+    invoke-virtual {p1}, Lcom/alensw/b/c/f;->d()Ljava/lang/String;
-+
-+    move-result-object v6
-+
-+    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-+
-+    move-result-object v5
-+
-+    const-string v6, ", uri="
-+
-+    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-+
-+    move-result-object v5
-+
-+    invoke-virtual {v5, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-+
-+    move-result-object v5
-+
-+    const-string v6, ", mime="
-+
-+    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-+
-+    move-result-object v5
-+
-+    iget-object v6, v3, Lcom/alensw/b/h/a;->outMimeType:Ljava/lang/String;
-+
-+    invoke-virtual {v5, v6}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-+
-+    move-result-object v5
-+
-+    invoke-virtual {v5}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-+
-+    move-result-object v5
-+
-+    invoke-static {v0, v5}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
-+
-+    const-string v0, "WebpMovie"
-+
 +    const-string v2, "try WebP runtime decoder (preferred)"
 +
 +    invoke-static {v0, v2}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
@@ -322,7 +274,7 @@
  
      iget-object v2, v3, Lcom/alensw/b/h/a;->outMimeType:Ljava/lang/String;
 --- /tmp/webp_clean_root/decoded/smali/com/alensw/b/h/r.smali	1969-12-31 19:00:00.000000000 -0500
-+++ ./decoded/smali/com/alensw/b/h/r.smali	2026-02-23 02:49:30.805525127 -0500
++++ ./decoded/smali/com/alensw/b/h/r.smali	2026-02-23 02:54:54.301469805 -0500
 @@ -0,0 +1,257 @@
 +.class public Lcom/alensw/b/h/r;
 +.super Lcom/alensw/b/h/j;
@@ -582,8 +534,8 @@
 +    return-wide v0
 +.end method
 --- /tmp/webp_clean_root/decoded/smali/com/alensw/b/h/t.smali	1969-12-31 19:00:00.000000000 -0500
-+++ ./decoded/smali/com/alensw/b/h/t.smali	2026-02-23 02:49:30.805525127 -0500
-@@ -0,0 +1,1146 @@
++++ ./decoded/smali/com/alensw/b/h/t.smali	2026-02-23 02:59:53.469423343 -0500
+@@ -0,0 +1,1070 @@
 +.class public Lcom/alensw/b/h/t;
 +.super Lcom/alensw/b/h/j;
 +
@@ -703,38 +655,6 @@
 +    invoke-virtual {p0}, Lcom/alensw/b/c/f;->d()Ljava/lang/String;
 +
 +    move-result-object v3
-+
-+    const-string v11, "WebpRuntime"
-+
-+    new-instance v12, Ljava/lang/StringBuilder;
-+
-+    invoke-direct {v12}, Ljava/lang/StringBuilder;-><init>()V
-+
-+    const-string v4, "open path="
-+
-+    invoke-virtual {v12, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-+
-+    move-result-object v12
-+
-+    invoke-virtual {v12, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-+
-+    move-result-object v12
-+
-+    const-string v4, ", uri="
-+
-+    invoke-virtual {v12, v4}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
-+
-+    move-result-object v12
-+
-+    invoke-virtual {v12, p1}, Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
-+
-+    move-result-object v12
-+
-+    invoke-virtual {v12}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
-+
-+    move-result-object v12
-+
-+    invoke-static {v11, v12}, Landroid/util/Log;->i(Ljava/lang/String;Ljava/lang/String;)I
 +
 +    invoke-direct {v2, v3}, Ljava/io/File;-><init>(Ljava/lang/String;)V
 +
@@ -960,50 +880,6 @@
 +
 +    :cond_size_done
 +
-+    invoke-virtual {v10}, Lcom/aureusapps/android/webpandroid/decoder/WebPDecoder;->decodeNextFrame()Lcom/aureusapps/android/webpandroid/decoder/FrameDecodeResult;
-+
-+    move-result-object v6
-+
-+    invoke-virtual {v6}, Lcom/aureusapps/android/webpandroid/decoder/FrameDecodeResult;->getFrame()Landroid/graphics/Bitmap;
-+
-+    move-result-object v7
-+
-+    if-nez v7, :cond_second_probe_ok
-+
-+    const-string v1, "WebpRuntime"
-+
-+    const-string v2, "second frame probe failed (null frame), fallback to other decoder"
-+
-+    invoke-static {v1, v2}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I
-+
-+    invoke-virtual {v10}, Lcom/aureusapps/android/webpandroid/decoder/WebPDecoder;->release()V
-+
-+    return-object v0
-+
-+    :cond_second_probe_ok
-+    invoke-virtual {v10}, Lcom/aureusapps/android/webpandroid/decoder/WebPDecoder;->reset()V
-+
-+    invoke-virtual {v10}, Lcom/aureusapps/android/webpandroid/decoder/WebPDecoder;->decodeNextFrame()Lcom/aureusapps/android/webpandroid/decoder/FrameDecodeResult;
-+
-+    move-result-object v3
-+
-+    invoke-virtual {v3}, Lcom/aureusapps/android/webpandroid/decoder/FrameDecodeResult;->getFrame()Landroid/graphics/Bitmap;
-+
-+    move-result-object v11
-+
-+    if-nez v11, :cond_replay_first_ok
-+
-+    const-string v1, "WebpRuntime"
-+
-+    const-string v2, "first frame replay after reset failed, fallback to other decoder"
-+
-+    invoke-static {v1, v2}, Landroid/util/Log;->w(Ljava/lang/String;Ljava/lang/String;)I
-+
-+    invoke-virtual {v10}, Lcom/aureusapps/android/webpandroid/decoder/WebPDecoder;->release()V
-+
-+    return-object v0
-+
-+    :cond_replay_first_ok
 +    new-instance v6, Lcom/alensw/b/h/t;
 +
 +    invoke-virtual {v3}, Lcom/aureusapps/android/webpandroid/decoder/FrameDecodeResult;->getTimestamp()I
@@ -1731,7 +1607,7 @@
 +    return-object v0
 +.end method
 --- /tmp/webp_clean_root/decoded/smali/com/alensw/b/h/u.smali	1969-12-31 19:00:00.000000000 -0500
-+++ ./decoded/smali/com/alensw/b/h/u.smali	2026-02-23 02:49:30.805525127 -0500
++++ ./decoded/smali/com/alensw/b/h/u.smali	2026-02-23 02:54:54.301469805 -0500
 @@ -0,0 +1,68 @@
 +.class Lcom/alensw/b/h/u;
 +.super Ljava/lang/Object;
@@ -1802,7 +1678,7 @@
 +    return-void
 +.end method
 --- /tmp/webp_clean_root/decoded/smali/com/alensw/b/h/v.smali	1969-12-31 19:00:00.000000000 -0500
-+++ ./decoded/smali/com/alensw/b/h/v.smali	2026-02-23 02:49:30.805525127 -0500
++++ ./decoded/smali/com/alensw/b/h/v.smali	2026-02-23 02:54:54.301469805 -0500
 @@ -0,0 +1,45 @@
 +.class Lcom/alensw/b/h/v;
 +.super Ljava/lang/Object;
