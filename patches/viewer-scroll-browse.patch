@@ -1,0 +1,211 @@
+--- /tmp/viewer_scroll_clean_root/decoded/res/values/strings.xml	2026-02-23 10:48:37.468028043 -0500
++++ ./decoded/res/values/strings.xml	2026-02-23 10:45:21.550291862 -0500
+@@ -136,6 +136,8 @@
+     <string name="slideshow_shuffle">Shuffle showing</string>
+     <string name="single_tap_zoom">Single tap to zoom</string>
+     <string name="single_tap_zoom_summary">Single tap to zoom and double tap to show action bar, otherwise inverse</string>
++    <string name="viewer_scroll_browse">Scroll browsing in viewer</string>
++    <string name="viewer_scroll_browse_summary">Use vertical swipe/fling to browse photos continuously instead of horizontal page flipping</string>
+     <string name="sort">Sort</string>
+     <string name="sort_by_date">By date</string>
+     <string name="sort_by_name">By name</string>
+--- /tmp/viewer_scroll_clean_root/decoded/res/values-zh/strings.xml	2026-02-23 10:48:37.476027950 -0500
++++ ./decoded/res/values-zh/strings.xml	2026-02-23 10:45:31.158180799 -0500
+@@ -135,6 +135,8 @@
+     <string name="slideshow_shuffle">随机播放</string>
+     <string name="single_tap_zoom">单击进行缩放</string>
+     <string name="single_tap_zoom_summary">单击缩放，双击显示控制栏，否则反之</string>
++    <string name="viewer_scroll_browse">大图滚动浏览</string>
++    <string name="viewer_scroll_browse_summary">在大图模式中使用竖向滑动/甩动连续浏览，替代原有横向翻页触发</string>
+     <string name="sort">排序</string>
+     <string name="sort_by_date">按时间</string>
+     <string name="sort_by_name">按名称</string>
+--- /tmp/viewer_scroll_clean_root/decoded/res/xml/main_pref.xml	2026-02-23 10:48:37.452028229 -0500
++++ ./decoded/res/xml/main_pref.xml	2026-02-23 10:45:41.482061429 -0500
+@@ -41,6 +41,7 @@
+         </PreferenceCategory>
+         <PreferenceCategory android:layout="@layout/pref_category" android:title="@string/controls_category">
+             <SwitchPreference android:icon="@drawable/ic_tap_zoom" android:title="@string/single_tap_zoom" android:key="single_tap_zoom" android:summary="@string/single_tap_zoom_summary" android:singleLineTitle="false" />
++            <SwitchPreference android:icon="@drawable/ic_invisible" android:title="@string/viewer_scroll_browse" android:key="viewer_scroll_browse" android:summary="@string/viewer_scroll_browse_summary" android:defaultValue="false" android:singleLineTitle="false" />
+             <com.alensw.ui.view.MultiListPreference android:icon="@drawable/ic_invisible" android:entries="@array/show_controls" android:title="@string/show_controls" android:key="show_controls" android:defaultValue="1" android:dialogTitle="@string/show_controls" android:singleLineTitle="false" />
+         </PreferenceCategory>
+         <PreferenceCategory android:layout="@layout/pref_category" android:title="@string/image_category">
+@@ -151,4 +152,4 @@
+         </Preference>
+         <Preference android:icon="@drawable/ic_mod_base" android:title="@string/app_name_alt" android:summary="@string/mod_base" android:singleLineTitle="false" />
+     </PreferenceScreen>
+-</PreferenceScreen>
+\ No newline at end of file
++</PreferenceScreen>
+--- /tmp/viewer_scroll_clean_root/decoded/res/xml-v28/main_pref.xml	2026-02-23 10:48:37.392028920 -0500
++++ ./decoded/res/xml-v28/main_pref.xml	2026-02-23 10:45:54.097915545 -0500
+@@ -40,6 +40,7 @@
+         </PreferenceCategory>
+         <PreferenceCategory android:layout="@layout/pref_category" android:title="@string/controls_category" android:singleLineTitle="false">
+             <SwitchPreference android:icon="@drawable/ic_tap_zoom" android:title="@string/single_tap_zoom" android:key="single_tap_zoom" android:summary="@string/single_tap_zoom_summary" android:singleLineTitle="false" />
++            <SwitchPreference android:icon="@drawable/ic_invisible" android:title="@string/viewer_scroll_browse" android:key="viewer_scroll_browse" android:summary="@string/viewer_scroll_browse_summary" android:defaultValue="false" android:singleLineTitle="false" />
+             <com.alensw.ui.view.MultiListPreference android:icon="@drawable/ic_invisible" android:entries="@array/show_controls" android:title="@string/show_controls" android:key="show_controls" android:defaultValue="1" android:dialogTitle="@string/show_controls" android:singleLineTitle="false" />
+         </PreferenceCategory>
+         <PreferenceCategory android:layout="@layout/pref_category" android:title="@string/image_category" android:singleLineTitle="false">
+@@ -150,4 +151,4 @@
+         </Preference>
+         <Preference android:icon="@drawable/ic_mod_base" android:title="@string/app_name_alt" android:summary="@string/mod_base" android:singleLineTitle="false" />
+     </PreferenceScreen>
+-</PreferenceScreen>
+\ No newline at end of file
++</PreferenceScreen>
+--- /tmp/viewer_scroll_clean_root/decoded/res/xml-v33/main_pref.xml	2026-02-23 10:48:37.432028460 -0500
++++ ./decoded/res/xml-v33/main_pref.xml	2026-02-23 10:46:03.325808695 -0500
+@@ -43,6 +43,7 @@
+         </PreferenceCategory>
+         <PreferenceCategory android:layout="@layout/pref_category" android:title="@string/controls_category" android:singleLineTitle="false">
+             <SwitchPreference android:icon="@drawable/ic_tap_zoom" android:title="@string/single_tap_zoom" android:key="single_tap_zoom" android:summary="@string/single_tap_zoom_summary" android:singleLineTitle="false" />
++            <SwitchPreference android:icon="@drawable/ic_invisible" android:title="@string/viewer_scroll_browse" android:key="viewer_scroll_browse" android:summary="@string/viewer_scroll_browse_summary" android:defaultValue="false" android:singleLineTitle="false" />
+             <com.alensw.ui.view.MultiListPreference android:icon="@drawable/ic_invisible" android:entries="@array/show_controls" android:title="@string/show_controls" android:key="show_controls" android:defaultValue="1" android:dialogTitle="@string/show_controls" android:singleLineTitle="false" />
+         </PreferenceCategory>
+         <PreferenceCategory android:layout="@layout/pref_category" android:title="@string/image_category" android:singleLineTitle="false">
+@@ -153,4 +154,4 @@
+         </Preference>
+         <Preference android:icon="@drawable/ic_mod_base" android:title="@string/app_name_alt" android:summary="@string/mod_base" android:singleLineTitle="false" />
+     </PreferenceScreen>
+-</PreferenceScreen>
+\ No newline at end of file
++</PreferenceScreen>
+--- /tmp/viewer_scroll_clean_root/decoded/smali/com/alensw/ui/c/be.smali	2026-02-23 10:48:37.880023287 -0500
++++ ./decoded/smali/com/alensw/ui/c/be.smali	2026-02-23 10:46:31.849478792 -0500
+@@ -397,6 +397,26 @@
+ 
+     iget-object v0, p0, Lcom/alensw/ui/c/be;->a:Lcom/alensw/ui/c/as;
+ 
++    iget-object v0, v0, Lcom/alensw/ui/c/as;->C:Lcom/alensw/ui/c/cx;
++
++    invoke-static {v0}, Landroid/preference/PreferenceManager;->getDefaultSharedPreferences(Landroid/content/Context;)Landroid/content/SharedPreferences;
++
++    move-result-object v0
++
++    const-string v3, "viewer_scroll_browse"
++
++    invoke-interface {v0, v3, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
++
++    move-result v0
++
++    if-eqz v0, :cond_scroll_mode_off
++
++    return v2
++
++    :cond_scroll_mode_off
++
++    iget-object v0, p0, Lcom/alensw/ui/c/be;->a:Lcom/alensw/ui/c/as;
++
+     invoke-static {v0}, Lcom/alensw/ui/c/as;->b(Lcom/alensw/ui/c/as;)Lcom/alensw/bean/CommonFolder;
+ 
+     move-result-object v0
+--- /tmp/viewer_scroll_clean_root/decoded/smali/com/alensw/ui/c/eb.smali	2026-02-23 10:48:37.896023101 -0500
++++ ./decoded/smali/com/alensw/ui/c/eb.smali	2026-02-23 10:46:47.385299304 -0500
+@@ -398,6 +398,26 @@
+ 
+     iget-object v0, p0, Lcom/alensw/ui/c/eb;->a:Lcom/alensw/ui/c/dp;
+ 
++    iget-object v0, v0, Lcom/alensw/ui/c/dp;->C:Lcom/alensw/ui/c/cx;
++
++    invoke-static {v0}, Landroid/preference/PreferenceManager;->getDefaultSharedPreferences(Landroid/content/Context;)Landroid/content/SharedPreferences;
++
++    move-result-object v0
++
++    const-string v3, "viewer_scroll_browse"
++
++    invoke-interface {v0, v3, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
++
++    move-result v0
++
++    if-eqz v0, :cond_scroll_mode_off
++
++    return v2
++
++    :cond_scroll_mode_off
++
++    iget-object v0, p0, Lcom/alensw/ui/c/eb;->a:Lcom/alensw/ui/c/dp;
++
+     invoke-static {v0}, Lcom/alensw/ui/c/dp;->a(Lcom/alensw/ui/c/dp;)Lcom/alensw/a/e;
+ 
+     move-result-object v0
+--- /tmp/viewer_scroll_clean_root/decoded/smali/com/alensw/ui/view/bb.smali	2026-02-23 10:48:37.912022917 -0500
++++ ./decoded/smali/com/alensw/ui/view/bb.smali	2026-02-23 10:47:23.684880499 -0500
+@@ -287,13 +287,76 @@
+ .end method
+ 
+ .method public e(FF)V
+-    .locals 1
++    .locals 5
+ 
+     iget-object v0, p0, Lcom/alensw/ui/view/bb;->a:Lcom/alensw/ui/view/PictureView;
+ 
++    invoke-virtual {v0}, Lcom/alensw/ui/view/PictureView;->getContext()Landroid/content/Context;
++
++    move-result-object v0
++
++    invoke-static {v0}, Landroid/preference/PreferenceManager;->getDefaultSharedPreferences(Landroid/content/Context;)Landroid/content/SharedPreferences;
++
++    move-result-object v0
++
++    const-string v1, "viewer_scroll_browse"
++
++    const/4 v2, 0x0
++
++    invoke-interface {v0, v1, v2}, Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z
++
++    move-result v0
++
++    if-eqz v0, :cond_0
++
++    invoke-static {p1}, Ljava/lang/Math;->abs(F)F
++
++    move-result v0
++
++    invoke-static {p2}, Ljava/lang/Math;->abs(F)F
++
++    move-result v1
++
++    cmpl-float v3, v1, v0
++
++    if-lez v3, :cond_0
++
++    iget-object v3, p0, Lcom/alensw/ui/view/bb;->a:Lcom/alensw/ui/view/PictureView;
++
++    iget v3, v3, Lcom/alensw/ui/view/PictureView;->ah:F
++
++    cmpl-float v1, v1, v3
++
++    if-lez v1, :cond_0
++
++    iget-object v1, p0, Lcom/alensw/ui/view/bb;->a:Lcom/alensw/ui/view/PictureView;
++
++    iget-object v1, v1, Lcom/alensw/ui/view/PictureView;->K:Lcom/alensw/ui/view/q;
++
++    if-eqz v1, :cond_0
++
++    const/4 v0, 0x1
++
++    cmpg-float v2, p2, v2
++
++    if-gez v2, :cond_1
++
++    :goto_0
++    invoke-interface {v1, v0}, Lcom/alensw/ui/view/q;->b(I)V
++
++    return-void
++
++    :cond_0
++    iget-object v0, p0, Lcom/alensw/ui/view/bb;->a:Lcom/alensw/ui/view/PictureView;
++
+     invoke-virtual {v0, p1, p2}, Lcom/alensw/ui/view/PictureView;->d(FF)Z
+ 
+     return-void
++
++    :cond_1
++    const/4 v0, -0x1
++
++    goto :goto_0
+ .end method
+ 
+ .method public f(FF)V
