@@ -1455,8 +1455,8 @@ diff -ruN /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as_scroll_adapter.smali
 +.end method
 diff -ruN /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as_scroll_anim_apply.smali decoded/smali/com/alensw/ui/c/as_scroll_anim_apply.smali
 --- /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as_scroll_anim_apply.smali	1969-12-31 19:00:00.000000000 -0500
-+++ decoded/smali/com/alensw/ui/c/as_scroll_anim_apply.smali	2026-02-23 16:11:27.020475877 -0500
-@@ -0,0 +1,110 @@
++++ decoded/smali/com/alensw/ui/c/as_scroll_anim_apply.smali	2026-02-23 18:40:00.000000000 -0500
+@@ -0,0 +1,122 @@
 +.class final Lcom/alensw/ui/c/as_scroll_anim_apply;
 +.super Ljava/lang/Object;
 +
@@ -1498,7 +1498,7 @@ diff -ruN /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as_scroll_anim_apply.sm
 +
 +# virtual methods
 +.method public run()V
-+    .locals 6
++    .locals 7
 +
 +    iget-object v0, p0, Lcom/alensw/ui/c/as_scroll_anim_apply;->a:Ljava/lang/ref/WeakReference;
 +
@@ -1544,11 +1544,24 @@ diff -ruN /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as_scroll_anim_apply.sm
 +
 +    if-eqz v4, :cond_0
 +
-+    const/4 v5, 0x0
++    invoke-virtual {v2}, Lcom/alensw/b/h/j;->d()Landroid/graphics/Bitmap;
 +
-+    invoke-virtual {v4, v5}, Landroid/widget/ImageView;->setVisibility(I)V
++    move-result-object v5
++
++    if-eqz v5, :cond_0
++
++    invoke-static {v4}, Lcom/alensw/ui/c/viewer_scroll_loader;->c(Landroid/widget/ImageView;)V
++
++    invoke-virtual {v4, v5}, Landroid/widget/ImageView;->setImageBitmap(Landroid/graphics/Bitmap;)V
 +
 +    :cond_0
++    if-eqz v4, :cond_1
++
++    const/4 v6, 0x0
++
++    invoke-virtual {v4, v6}, Landroid/widget/ImageView;->setVisibility(I)V
++
++    :cond_1
 +    iget-object v4, p0, Lcom/alensw/ui/c/as_scroll_anim_apply;->c:Ljava/lang/ref/WeakReference;
 +
 +    invoke-virtual {v4}, Ljava/lang/ref/WeakReference;->get()Ljava/lang/Object;
@@ -1566,7 +1579,6 @@ diff -ruN /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as_scroll_anim_apply.sm
 +    :cond_3
 +    return-void
 +.end method
-+
 diff -ruN /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as_scroll_anim_task.smali decoded/smali/com/alensw/ui/c/as_scroll_anim_task.smali
 --- /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as_scroll_anim_task.smali	1969-12-31 19:00:00.000000000 -0500
 +++ decoded/smali/com/alensw/ui/c/as_scroll_anim_task.smali	2026-02-23 16:37:34.192236805 -0500
@@ -2682,8 +2694,8 @@ diff -ruN /tmp/stage1_root/decoded/smali/com/alensw/ui/c/dp_scroll_adapter.smali
 +.end method
 diff -ruN /tmp/stage1_root/decoded/smali/com/alensw/ui/c/dp_scroll_anim_apply.smali decoded/smali/com/alensw/ui/c/dp_scroll_anim_apply.smali
 --- /tmp/stage1_root/decoded/smali/com/alensw/ui/c/dp_scroll_anim_apply.smali	1969-12-31 19:00:00.000000000 -0500
-+++ decoded/smali/com/alensw/ui/c/dp_scroll_anim_apply.smali	2026-02-23 16:12:14.352468731 -0500
-@@ -0,0 +1,110 @@
++++ decoded/smali/com/alensw/ui/c/dp_scroll_anim_apply.smali	2026-02-23 18:40:00.000000000 -0500
+@@ -0,0 +1,122 @@
 +.class final Lcom/alensw/ui/c/dp_scroll_anim_apply;
 +.super Ljava/lang/Object;
 +
@@ -2725,7 +2737,7 @@ diff -ruN /tmp/stage1_root/decoded/smali/com/alensw/ui/c/dp_scroll_anim_apply.sm
 +
 +# virtual methods
 +.method public run()V
-+    .locals 6
++    .locals 7
 +
 +    iget-object v0, p0, Lcom/alensw/ui/c/dp_scroll_anim_apply;->a:Ljava/lang/ref/WeakReference;
 +
@@ -2771,11 +2783,24 @@ diff -ruN /tmp/stage1_root/decoded/smali/com/alensw/ui/c/dp_scroll_anim_apply.sm
 +
 +    if-eqz v4, :cond_0
 +
-+    const/4 v5, 0x0
++    invoke-virtual {v2}, Lcom/alensw/b/h/j;->d()Landroid/graphics/Bitmap;
 +
-+    invoke-virtual {v4, v5}, Landroid/widget/ImageView;->setVisibility(I)V
++    move-result-object v5
++
++    if-eqz v5, :cond_0
++
++    invoke-static {v4}, Lcom/alensw/ui/c/viewer_scroll_loader;->c(Landroid/widget/ImageView;)V
++
++    invoke-virtual {v4, v5}, Landroid/widget/ImageView;->setImageBitmap(Landroid/graphics/Bitmap;)V
 +
 +    :cond_0
++    if-eqz v4, :cond_1
++
++    const/4 v6, 0x0
++
++    invoke-virtual {v4, v6}, Landroid/widget/ImageView;->setVisibility(I)V
++
++    :cond_1
 +    iget-object v4, p0, Lcom/alensw/ui/c/dp_scroll_anim_apply;->c:Ljava/lang/ref/WeakReference;
 +
 +    invoke-virtual {v4}, Ljava/lang/ref/WeakReference;->get()Ljava/lang/Object;
@@ -2793,7 +2818,6 @@ diff -ruN /tmp/stage1_root/decoded/smali/com/alensw/ui/c/dp_scroll_anim_apply.sm
 +    :cond_3
 +    return-void
 +.end method
-+
 diff -ruN /tmp/stage1_root/decoded/smali/com/alensw/ui/c/dp_scroll_anim_task.smali decoded/smali/com/alensw/ui/c/dp_scroll_anim_task.smali
 --- /tmp/stage1_root/decoded/smali/com/alensw/ui/c/dp_scroll_anim_task.smali	1969-12-31 19:00:00.000000000 -0500
 +++ decoded/smali/com/alensw/ui/c/dp_scroll_anim_task.smali	2026-02-23 16:37:40.708235580 -0500
