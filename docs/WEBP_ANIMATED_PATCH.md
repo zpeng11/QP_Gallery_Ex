@@ -36,6 +36,7 @@ Runtime payload source:
 - API < 28 animation uses background decode + UI-thread frame consume, with real-time scheduling (drop stale frames instead of global slow playback).
 - Runtime failures automatically fall back to static decode path.
 - Runtime payload injection is deterministic and checksum-validated.
+- Large GIF/WebP decode tasks now drive a visible loading indicator (`cx.i(true)` / action-bar progress) during async decode; it is hidden when the current frame is bound or pending tasks are cancelled.
 
 ## Diagnostics
 

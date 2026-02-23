@@ -1,0 +1,98 @@
+--- /tmp/loading_indicator_base/decoded/smali/com/alensw/ui/c/as.smali	2026-02-23 08:32:22.202424342 -0500
++++ ./decoded/smali/com/alensw/ui/c/as.smali	2026-02-23 08:31:16.641358755 -0500
+@@ -1329,6 +1329,8 @@
+ 
+     invoke-virtual {v0, v1}, Landroid/os/Handler;->removeMessages(I)V
+ 
++    invoke-virtual {p0, v2}, Lcom/alensw/ui/c/as;->c(Z)V
++
+     return-void
+ .end method
+ 
+@@ -1451,6 +1453,8 @@
+ 
+     iput-object v0, p0, Lcom/alensw/ui/c/as;->L:Lcom/alensw/a/as;
+ 
++    invoke-virtual {p0, v3}, Lcom/alensw/ui/c/as;->c(Z)V
++
+     goto :goto_0
+ .end method
+ 
+@@ -1673,6 +1677,10 @@
+ 
+     iput-object v0, p0, Lcom/alensw/ui/c/as;->M:Lcom/alensw/a/as;
+ 
++    const/4 v0, 0x1
++
++    invoke-virtual {p0, v0}, Lcom/alensw/ui/c/as;->c(Z)V
++
+     :cond_1
+     return-void
+ .end method
+@@ -3128,6 +3136,8 @@
+ 
+     invoke-virtual {p0, p1, v0}, Lcom/alensw/ui/c/as;->a(Lcom/alensw/b/h/j;Z)V
+ 
++    invoke-virtual {p0, v0}, Lcom/alensw/ui/c/as;->c(Z)V
++
+     :cond_0
+     :goto_0
+     iget-object v0, p0, Lcom/alensw/ui/c/as;->b:Landroid/os/Handler;
+@@ -4392,6 +4402,8 @@
+ 
+     invoke-virtual {v0, v1}, Lcom/alensw/a/ao;->b(Lcom/alensw/b/h/j;)V
+ 
++    invoke-virtual {p0, v1}, Lcom/alensw/ui/c/as;->c(Z)V
++
+     return-void
+ .end method
+ 
+--- /tmp/loading_indicator_base/decoded/smali/com/alensw/ui/c/dp.smali	2026-02-23 08:32:22.202424342 -0500
++++ ./decoded/smali/com/alensw/ui/c/dp.smali	2026-02-23 08:31:23.960137477 -0500
+@@ -1474,6 +1474,8 @@
+ 
+     invoke-virtual {v0, v1}, Landroid/os/Handler;->removeMessages(I)V
+ 
++    invoke-virtual {p0, v2}, Lcom/alensw/ui/c/dp;->c(Z)V
++
+     return-void
+ .end method
+ 
+@@ -1600,6 +1602,8 @@
+ 
+     iput-object v0, p0, Lcom/alensw/ui/c/dp;->M:Lcom/alensw/a/as;
+ 
++    invoke-virtual {p0, v4}, Lcom/alensw/ui/c/dp;->c(Z)V
++
+     goto :goto_0
+ .end method
+ 
+@@ -1811,6 +1815,10 @@
+ 
+     iput-object v0, p0, Lcom/alensw/ui/c/dp;->N:Lcom/alensw/a/as;
+ 
++    const/4 v0, 0x1
++
++    invoke-virtual {p0, v0}, Lcom/alensw/ui/c/dp;->c(Z)V
++
+     :cond_1
+     return-void
+ .end method
+@@ -3081,6 +3089,8 @@
+ 
+     invoke-virtual {p0, p1, v0}, Lcom/alensw/ui/c/dp;->a(Lcom/alensw/b/h/j;Z)V
+ 
++    invoke-virtual {p0, v0}, Lcom/alensw/ui/c/dp;->c(Z)V
++
+     :cond_0
+     :goto_0
+     iget-object v0, p0, Lcom/alensw/ui/c/dp;->b:Landroid/os/Handler;
+@@ -4385,6 +4395,8 @@
+ 
+     invoke-virtual {v0, v1}, Lcom/alensw/a/ao;->b(Lcom/alensw/b/h/j;)V
+ 
++    invoke-virtual {p0, v1}, Lcom/alensw/ui/c/dp;->c(Z)V
++
+     return-void
+ .end method
+ 
