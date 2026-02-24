@@ -1,0 +1,18 @@
+diff -ruN /tmp/stage1_root/decoded/res/layout/viewer.xml decoded/res/layout/viewer.xml
+--- /tmp/stage1_root/decoded/res/layout/viewer.xml	2026-02-23 14:05:52.486401690 -0500
++++ decoded/res/layout/viewer.xml	2026-02-23 15:47:52.668768648 -0500
+@@ -2,6 +2,7 @@
+ <RelativeLayout android:layout_width="fill_parent" android:layout_height="fill_parent"
+   xmlns:android="http://schemas.android.com/apk/res/android">
+     <com.alensw.ui.view.PictureView android:id="@id/image" android:focusable="true" android:focusableInTouchMode="true" android:layout_width="fill_parent" android:layout_height="fill_parent" />
++    <ListView android:id="@id/container" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="fill_parent" android:cacheColorHint="@android:color/transparent" android:divider="@null" android:dividerHeight="0.0dip" android:fastScrollEnabled="false" android:scrollbarStyle="outsideOverlay" />
+     <ImageView android:id="@id/showing" android:visibility="invisible" android:layout_width="fill_parent" android:layout_height="fill_parent" android:scaleType="matrix" />
+     <ImageView android:id="@id/play" android:visibility="gone" android:layout_centerInParent="true" style="@style/VideoButton" />
+     <LinearLayout android:id="@id/bottom_bar" android:clickable="false" android:layout_marginBottom="12.0dip" style="@style/ToolBar.Bottom">
+@@ -12,4 +13,4 @@
+         <ImageView android:id="@id/zoomin" android:background="@android:color/transparent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_centerVertical="true" android:layout_toStartOf="@id/show3d" style="@style/ActionButtonDetails" />
+         <ImageView android:id="@id/zoomout" android:background="@android:color/transparent" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="10.0dip" android:layout_centerVertical="true" android:layout_toStartOf="@id/zoomin" style="@style/ActionButtonDetails" />
+     </LinearLayout>
+-</RelativeLayout>
+\ No newline at end of file
++</RelativeLayout>

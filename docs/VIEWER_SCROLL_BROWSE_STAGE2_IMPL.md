@@ -11,13 +11,12 @@
   - 将焦点图同步回原有 viewer 状态（当前索引/当前 URI/当前类型），并继续使用原有解码链路驱动动作菜单目标。
 - `as` / `dp` 两条 viewer 入口都已接入同一策略。
 
-## 主要改动文件
-- `decoded/res/layout/viewer.xml`
-- `decoded/smali/com/alensw/ui/c/as.smali`
-- `decoded/smali/com/alensw/ui/c/dp.smali`
-- `decoded/smali/com/alensw/ui/c/as_scroll_touch.smali` (new)
-- `decoded/smali/com/alensw/ui/c/dp_scroll_touch.smali` (new)
-- `patches/viewer-scroll-browse-stage2.patch`
+## 主要补丁文件
+- `patches/viewer-scroll-browse-stage2-layout.patch`
+- `patches/viewer-scroll-browse-stage2-loader.patch`
+- `patches/viewer-scroll-browse-stage2-as-flow.patch`
+- `patches/viewer-scroll-browse-stage2-dp-flow.patch`
+- `patches/viewer-scroll-browse-stage2-anim-placeholder-fix.patch`
 - `patches/series`
 
 ## 行为说明
@@ -28,3 +27,6 @@
 - 当前实现优先保证功能落地与兼容，尚未引入窗口复用与分层预加载。
 - 连续流中的图片项使用 `ImageView + setImageURI`，焦点图通过原 `PictureView` 解码链路维持动作一致性。
 - 后续可继续演进：窗口化复用、焦点缩放状态保留、滚动性能优化。
+
+## 补充说明
+- `viewer-scroll-browse-stage2-anim-placeholder-fix.patch` 用于修复 GIF/WebP 占位图在加载完成后可能出现的灰块/错误尺寸残留问题。

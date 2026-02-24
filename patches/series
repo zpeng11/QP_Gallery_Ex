@@ -3,4 +3,8 @@ saf-included-folders-stage1.patch
 slow-sd-responsive-loading.patch
 loading-indicator-progress.patch
 viewer-scroll-browse.patch
-viewer-scroll-browse-stage2.patch
+viewer-scroll-browse-stage2-layout.patch
+viewer-scroll-browse-stage2-loader.patch
+viewer-scroll-browse-stage2-as-flow.patch
+viewer-scroll-browse-stage2-dp-flow.patch
+viewer-scroll-browse-stage2-anim-placeholder-fix.patch
