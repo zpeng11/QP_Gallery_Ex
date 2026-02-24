@@ -1,6 +1,5 @@
-diff -ruN /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as.smali decoded/smali/com/alensw/ui/c/as.smali
 --- /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as.smali	2026-02-23 14:06:02.810398003 -0500
-+++ decoded/smali/com/alensw/ui/c/as.smali	2026-02-23 15:47:52.668768648 -0500
++++ decoded/smali/com/alensw/ui/c/as.smali	2026-02-24 00:56:25.941870916 -0500
 @@ -329,6 +329,140 @@
      return-void
  .end method
@@ -315,10 +314,9 @@ diff -ruN /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as.smali decoded/smali/
      goto/16 :goto_0
  
      :cond_4
-diff -ruN /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as_scroll_adapter.smali decoded/smali/com/alensw/ui/c/as_scroll_adapter.smali
 --- /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as_scroll_adapter.smali	1969-12-31 19:00:00.000000000 -0500
-+++ decoded/smali/com/alensw/ui/c/as_scroll_adapter.smali	2026-02-23 16:35:25.152256705 -0500
-@@ -0,0 +1,415 @@
++++ decoded/smali/com/alensw/ui/c/as_scroll_adapter.smali	2026-02-24 01:24:56.362336778 -0500
+@@ -0,0 +1,432 @@
 +.class Lcom/alensw/ui/c/as_scroll_adapter;
 +.super Landroid/widget/BaseAdapter;
 +
@@ -658,6 +656,23 @@ diff -ruN /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as_scroll_adapter.smali
 +    move-result v12
 +
 +    :cond_5
++    if-eqz v12, :cond_5a
++
++    if-eqz v5, :cond_5a
++
++    invoke-virtual {v5}, Landroid/net/Uri;->toString()Ljava/lang/String;
++
++    move-result-object v6
++
++    invoke-static {v6}, Lcom/alensw/ui/c/viewer_scroll_loader;->t(Ljava/lang/String;)I
++
++    move-result v7
++
++    if-nez v7, :cond_5a
++
++    const/4 v12, 0x0
++
++    :cond_5a
 +    invoke-virtual {p0}, Lcom/alensw/ui/c/as_scroll_adapter;->getCount()I
 +
 +    move-result v11
@@ -734,9 +749,8 @@ diff -ruN /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as_scroll_adapter.smali
 +    :cond_7
 +    return-object p2
 +.end method
-diff -ruN /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as_scroll_anim_task.smali decoded/smali/com/alensw/ui/c/as_scroll_anim_task.smali
 --- /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as_scroll_anim_task.smali	1969-12-31 19:00:00.000000000 -0500
-+++ decoded/smali/com/alensw/ui/c/as_scroll_anim_task.smali	2026-02-23 16:37:34.192236805 -0500
++++ decoded/smali/com/alensw/ui/c/as_scroll_anim_task.smali	2026-02-24 00:56:25.941870916 -0500
 @@ -0,0 +1,181 @@
 +.class final Lcom/alensw/ui/c/as_scroll_anim_task;
 +.super Ljava/lang/Object;
@@ -919,9 +933,8 @@ diff -ruN /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as_scroll_anim_task.sma
 +
 +    return-void
 +.end method
-diff -ruN /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as_scroll_listener.smali decoded/smali/com/alensw/ui/c/as_scroll_listener.smali
 --- /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as_scroll_listener.smali	1969-12-31 19:00:00.000000000 -0500
-+++ decoded/smali/com/alensw/ui/c/as_scroll_listener.smali	2026-02-23 15:47:52.668768648 -0500
++++ decoded/smali/com/alensw/ui/c/as_scroll_listener.smali	2026-02-24 00:56:25.941870916 -0500
 @@ -0,0 +1,130 @@
 +.class Lcom/alensw/ui/c/as_scroll_listener;
 +.super Ljava/lang/Object;
@@ -1053,9 +1066,8 @@ diff -ruN /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as_scroll_listener.smal
 +    :cond_0
 +    return-void
 +.end method
-diff -ruN /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as_scroll_touch.smali decoded/smali/com/alensw/ui/c/as_scroll_touch.smali
 --- /tmp/stage1_root/decoded/smali/com/alensw/ui/c/as_scroll_touch.smali	1969-12-31 19:00:00.000000000 -0500
-+++ decoded/smali/com/alensw/ui/c/as_scroll_touch.smali	2026-02-23 15:47:52.668768648 -0500
++++ decoded/smali/com/alensw/ui/c/as_scroll_touch.smali	2026-02-24 00:56:25.941870916 -0500
 @@ -0,0 +1,52 @@
 +.class Lcom/alensw/ui/c/as_scroll_touch;
 +.super Ljava/lang/Object;

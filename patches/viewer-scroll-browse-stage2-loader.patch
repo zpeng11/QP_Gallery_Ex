@@ -1,5 +1,5 @@
 --- /tmp/stage1_root/decoded/smali/com/alensw/ui/c/viewer_scroll_apply.smali	1969-12-31 19:00:00.000000000 -0500
-+++ decoded/smali/com/alensw/ui/c/viewer_scroll_apply.smali	2026-02-24 00:49:03.650986869 -0500
++++ decoded/smali/com/alensw/ui/c/viewer_scroll_apply.smali	2026-02-24 00:56:25.937870963 -0500
 @@ -0,0 +1,161 @@
 +.class final Lcom/alensw/ui/c/viewer_scroll_apply;
 +.super Ljava/lang/Object;
@@ -163,7 +163,7 @@
 +    return-void
 +.end method
 --- /tmp/stage1_root/decoded/smali/com/alensw/ui/c/viewer_scroll_load_task.smali	1969-12-31 19:00:00.000000000 -0500
-+++ decoded/smali/com/alensw/ui/c/viewer_scroll_load_task.smali	2026-02-24 00:50:41.417870239 -0500
++++ decoded/smali/com/alensw/ui/c/viewer_scroll_load_task.smali	2026-02-24 00:56:25.937870963 -0500
 @@ -0,0 +1,198 @@
 +.class final Lcom/alensw/ui/c/viewer_scroll_load_task;
 +.super Ljava/lang/Object;
@@ -364,8 +364,8 @@
 +    return-void
 +.end method
 --- /tmp/stage1_root/decoded/smali/com/alensw/ui/c/viewer_scroll_loader.smali	1969-12-31 19:00:00.000000000 -0500
-+++ decoded/smali/com/alensw/ui/c/viewer_scroll_loader.smali	2026-02-24 00:50:25.802048022 -0500
-@@ -0,0 +1,796 @@
++++ decoded/smali/com/alensw/ui/c/viewer_scroll_loader.smali	2026-02-24 01:24:46.406449910 -0500
+@@ -0,0 +1,866 @@
 +.class public final Lcom/alensw/ui/c/viewer_scroll_loader;
 +.super Ljava/lang/Object;
 +
@@ -382,6 +382,8 @@
 +.field private static volatile e:I
 +
 +.field private static final f:Ljava/util/concurrent/ConcurrentHashMap;
++
++.field private static final g:Ljava/util/concurrent/ConcurrentHashMap;
 +
 +
 +# direct methods
@@ -423,6 +425,12 @@
 +    invoke-direct {v0}, Ljava/util/concurrent/ConcurrentHashMap;-><init>()V
 +
 +    sput-object v0, Lcom/alensw/ui/c/viewer_scroll_loader;->f:Ljava/util/concurrent/ConcurrentHashMap;
++
++    new-instance v0, Ljava/util/concurrent/ConcurrentHashMap;
++
++    invoke-direct {v0}, Ljava/util/concurrent/ConcurrentHashMap;-><init>()V
++
++    sput-object v0, Lcom/alensw/ui/c/viewer_scroll_loader;->g:Ljava/util/concurrent/ConcurrentHashMap;
 +
 +    const/4 v0, -0x1
 +
@@ -1159,6 +1167,68 @@
 +    invoke-static {p0}, Lcom/alensw/ui/c/viewer_scroll_loader;->q(Ljava/lang/String;)Lcom/alensw/ui/c/viewer_scroll_apply;
 +
 +    move-result-object v0
++
++    return-void
++.end method
++
++.method public static t(Ljava/lang/String;)I
++    .locals 2
++
++    if-nez p0, :cond_0
++
++    const/4 v0, -0x1
++
++    return v0
++
++    :cond_0
++    sget-object v0, Lcom/alensw/ui/c/viewer_scroll_loader;->g:Ljava/util/concurrent/ConcurrentHashMap;
++
++    invoke-virtual {v0, p0}, Ljava/util/concurrent/ConcurrentHashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
++
++    move-result-object v1
++
++    instance-of v0, v1, Ljava/lang/Boolean;
++
++    if-nez v0, :cond_1
++
++    const/4 v0, -0x1
++
++    return v0
++
++    :cond_1
++    check-cast v1, Ljava/lang/Boolean;
++
++    invoke-virtual {v1}, Ljava/lang/Boolean;->booleanValue()Z
++
++    move-result v0
++
++    if-eqz v0, :cond_2
++
++    const/4 v0, 0x1
++
++    return v0
++
++    :cond_2
++    const/4 v0, 0x0
++
++    return v0
++.end method
++
++.method public static u(Ljava/lang/String;Z)V
++    .locals 2
++
++    if-nez p0, :cond_0
++
++    return-void
++
++    :cond_0
++    sget-object v0, Lcom/alensw/ui/c/viewer_scroll_loader;->g:Ljava/util/concurrent/ConcurrentHashMap;
++
++    invoke-static {p1}, Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
++
++    move-result-object v1
++
++    invoke-virtual {v0, p0, v1}, Ljava/util/concurrent/ConcurrentHashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
 +
 +    return-void
 +.end method
