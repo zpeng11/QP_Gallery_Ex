@@ -13,6 +13,7 @@ RUN apt-get update \
     make \
     patch \
     unzip \
+    zip \
     apktool \
     aapt \
     zipalign \
