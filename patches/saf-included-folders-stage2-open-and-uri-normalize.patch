@@ -1,0 +1,392 @@
+--- decoded/smali/com/alensw/ui/activity/PathListActivity.smali
++++ decoded/smali/com/alensw/ui/activity/PathListActivity.smali
+@@ -15,6 +15,10 @@
+ 
+ .field protected final f:Landroid/view/View$OnClickListener;
+ 
++.field protected final g:Landroid/widget/AdapterView$OnItemClickListener;
++
++.field protected final h:Landroid/view/View$OnClickListener;
++
+ 
+ # direct methods
+ .method public constructor <init>()V
+@@ -28,6 +32,18 @@
+ 
+     iput-object v0, p0, Lcom/alensw/ui/activity/PathListActivity;->f:Landroid/view/View$OnClickListener;
+ 
++    new-instance v0, Lcom/alensw/ui/activity/bn;
++
++    invoke-direct {v0, p0}, Lcom/alensw/ui/activity/bn;-><init>(Lcom/alensw/ui/activity/PathListActivity;)V
++
++    iput-object v0, p0, Lcom/alensw/ui/activity/PathListActivity;->g:Landroid/widget/AdapterView$OnItemClickListener;
++
++    new-instance v0, Lcom/alensw/ui/activity/bo;
++
++    invoke-direct {v0, p0}, Lcom/alensw/ui/activity/bo;-><init>(Lcom/alensw/ui/activity/PathListActivity;)V
++
++    iput-object v0, p0, Lcom/alensw/ui/activity/PathListActivity;->h:Landroid/view/View$OnClickListener;
++
+     return-void
+ .end method
+ 
+@@ -157,6 +173,79 @@
+     return-void
+ .end method
+ 
++.method protected d(Ljava/lang/String;)V
++    .locals 7
++
++    :try_start_0
++    invoke-static {p1}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
++
++    move-result-object v0
++
++    invoke-static {v0}, Lcom/alensw/b/j/a;->f(Landroid/net/Uri;)Landroid/net/Uri;
++
++    move-result-object v1
++
++    invoke-static {v1}, Lcom/alensw/bean/UriFile;->a(Landroid/net/Uri;)Lcom/alensw/bean/CommonFile;
++
++    move-result-object v2
++
++    invoke-virtual {v1}, Landroid/net/Uri;->getAuthority()Ljava/lang/String;
++
++    move-result-object v3
++
++    invoke-static {v1}, Lcom/alensw/b/j/a;->b(Landroid/net/Uri;)Ljava/lang/String;
++
++    move-result-object v4
++
++    if-eqz v3, :cond_0
++
++    if-nez v4, :cond_1
++
++    :cond_0
++    new-instance v0, Ljava/lang/IllegalArgumentException;
++
++    const-string v1, "Invalid SAF folder URI"
++
++    invoke-direct {v0, v1}, Ljava/lang/IllegalArgumentException;-><init>(Ljava/lang/String;)V
++
++    throw v0
++
++    :cond_1
++    new-instance v5, Lcom/alensw/bean/DocumentFolder;
++
++    invoke-direct {v5, v2, v3, v4}, Lcom/alensw/bean/DocumentFolder;-><init>(Lcom/alensw/bean/CommonFile;Ljava/lang/String;Ljava/lang/String;)V
++
++    new-instance v2, Landroid/content/Intent;
++
++    const-class v3, Lcom/alensw/PicFolder/GalleryActivity;
++
++    invoke-direct {v2, p0, v3}, Landroid/content/Intent;-><init>(Landroid/content/Context;Ljava/lang/Class;)V
++
++    invoke-virtual {v5}, Lcom/alensw/bean/DocumentFolder;->i()Landroid/net/Uri;
++
++    move-result-object v3
++
++    invoke-virtual {v2, v3}, Landroid/content/Intent;->setData(Landroid/net/Uri;)Landroid/content/Intent;
++
++    const-string v3, "QuickPic.folder"
++
++    invoke-virtual {v2, v3, v5}, Landroid/content/Intent;->putExtra(Ljava/lang/String;Landroid/os/Parcelable;)Landroid/content/Intent;
++
++    invoke-static {p0, v2}, Lcom/alensw/ui/activity/a;->a(Landroid/content/Context;Landroid/content/Intent;)Z
++    :try_end_0
++    .catch Ljava/lang/Throwable; {:try_start_0 .. :try_end_0} :catch_0
++
++    goto :goto_0
++
++    :catch_0
++    move-exception v0
++
++    invoke-static {p0, v0}, Lcom/alensw/b/l/b;->a(Landroid/content/Context;Ljava/lang/Throwable;)V
++
++    :goto_0
++    return-void
++.end method
++
+ .method public onCreate(Landroid/os/Bundle;)V
+     .locals 4
+     .annotation build Landroid/annotation/TargetApi;
+@@ -250,6 +339,12 @@
+ 
+     invoke-virtual {v0, v1}, Landroid/widget/ListView;->setAdapter(Landroid/widget/ListAdapter;)V
+ 
++    iget-object v0, p0, Lcom/alensw/ui/activity/PathListActivity;->c:Landroid/widget/ListView;
++
++    iget-object v1, p0, Lcom/alensw/ui/activity/PathListActivity;->g:Landroid/widget/AdapterView$OnItemClickListener;
++
++    invoke-virtual {v0, v1}, Landroid/widget/ListView;->setOnItemClickListener(Landroid/widget/AdapterView$OnItemClickListener;)V
++
+     return-void
+ 
+     :cond_0
+--- decoded/smali/com/alensw/ui/activity/bg.smali
++++ decoded/smali/com/alensw/ui/activity/bg.smali
+@@ -119,5 +119,21 @@
+ 
+     invoke-virtual {v2, v0}, Landroid/widget/ImageView;->setTag(Ljava/lang/Object;)V
+ 
++    invoke-virtual {p2, v0}, Landroid/view/View;->setTag(Ljava/lang/Object;)V
++
++    iget-object v3, p0, Lcom/alensw/ui/activity/bg;->c:Lcom/alensw/ui/activity/PathListActivity;
++
++    iget-object v3, v3, Lcom/alensw/ui/activity/PathListActivity;->h:Landroid/view/View$OnClickListener;
++
++    invoke-virtual {p2, v3}, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
++
++    invoke-virtual {v1, v0}, Landroid/widget/TextView;->setTag(Ljava/lang/Object;)V
++
++    iget-object v3, p0, Lcom/alensw/ui/activity/bg;->c:Lcom/alensw/ui/activity/PathListActivity;
++
++    iget-object v3, v3, Lcom/alensw/ui/activity/PathListActivity;->h:Landroid/view/View$OnClickListener;
++
++    invoke-virtual {v1, v3}, Landroid/widget/TextView;->setOnClickListener(Landroid/view/View$OnClickListener;)V
++
+     return-object p2
+ .end method
+--- /dev/null	2026-02-28 06:21:36.237367804 -0500
++++ decoded/smali/com/alensw/ui/activity/bn.smali	2026-02-28 11:02:04.229460011 -0500
+@@ -0,0 +1,54 @@
++.class Lcom/alensw/ui/activity/bn;
++.super Ljava/lang/Object;
++
++# interfaces
++.implements Landroid/widget/AdapterView$OnItemClickListener;
++
++
++# instance fields
++.field final synthetic a:Lcom/alensw/ui/activity/PathListActivity;
++
++
++# direct methods
++.method constructor <init>(Lcom/alensw/ui/activity/PathListActivity;)V
++    .locals 0
++
++    iput-object p1, p0, Lcom/alensw/ui/activity/bn;->a:Lcom/alensw/ui/activity/PathListActivity;
++
++    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
++
++    return-void
++.end method
++
++
++# virtual methods
++.method public onItemClick(Landroid/widget/AdapterView;Landroid/view/View;IJ)V
++    .locals 2
++
++    iget-object v0, p0, Lcom/alensw/ui/activity/bn;->a:Lcom/alensw/ui/activity/PathListActivity;
++
++    iget-object v0, v0, Lcom/alensw/ui/activity/PathListActivity;->a:Ljava/util/ArrayList;
++
++    invoke-virtual {v0, p3}, Ljava/util/ArrayList;->get(I)Ljava/lang/Object;
++
++    move-result-object v0
++
++    check-cast v0, Ljava/lang/String;
++
++    if-eqz v0, :cond_0
++
++    const-string v1, "content://"
++
++    invoke-virtual {v0, v1}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
++
++    move-result v1
++
++    if-eqz v1, :cond_0
++
++    iget-object v1, p0, Lcom/alensw/ui/activity/bn;->a:Lcom/alensw/ui/activity/PathListActivity;
++
++    invoke-virtual {v1, v0}, Lcom/alensw/ui/activity/PathListActivity;->d(Ljava/lang/String;)V
++
++    :cond_0
++    return-void
++.end method
+--- /dev/null	2026-02-28 06:21:36.237367804 -0500
++++ decoded/smali/com/alensw/ui/activity/bo.smali	2026-02-28 11:02:04.229460011 -0500
+@@ -0,0 +1,52 @@
++.class Lcom/alensw/ui/activity/bo;
++.super Ljava/lang/Object;
++
++# interfaces
++.implements Landroid/view/View$OnClickListener;
++
++
++# instance fields
++.field final synthetic a:Lcom/alensw/ui/activity/PathListActivity;
++
++
++# direct methods
++.method constructor <init>(Lcom/alensw/ui/activity/PathListActivity;)V
++    .locals 0
++
++    iput-object p1, p0, Lcom/alensw/ui/activity/bo;->a:Lcom/alensw/ui/activity/PathListActivity;
++
++    invoke-direct {p0}, Ljava/lang/Object;-><init>()V
++
++    return-void
++.end method
++
++
++# virtual methods
++.method public onClick(Landroid/view/View;)V
++    .locals 2
++
++    invoke-virtual {p1}, Landroid/view/View;->getTag()Ljava/lang/Object;
++
++    move-result-object v0
++
++    instance-of v1, v0, Ljava/lang/String;
++
++    if-eqz v1, :cond_0
++
++    check-cast v0, Ljava/lang/String;
++
++    const-string v1, "content://"
++
++    invoke-virtual {v0, v1}, Ljava/lang/String;->startsWith(Ljava/lang/String;)Z
++
++    move-result v1
++
++    if-eqz v1, :cond_0
++
++    iget-object v1, p0, Lcom/alensw/ui/activity/bo;->a:Lcom/alensw/ui/activity/PathListActivity;
++
++    invoke-virtual {v1, v0}, Lcom/alensw/ui/activity/PathListActivity;->d(Ljava/lang/String;)V
++
++    :cond_0
++    return-void
++.end method
+--- decoded/smali/com/alensw/b/j/a.smali
++++ decoded/smali/com/alensw/b/j/a.smali
+@@ -1072,6 +1072,115 @@
+     return v0
+ .end method
+ 
++.method public static f(Landroid/net/Uri;)Landroid/net/Uri;
++    .locals 5
++
++    if-eqz p0, :cond_3
++
++    :try_start_0
++    invoke-static {p0}, Lcom/alensw/b/j/a;->d(Landroid/net/Uri;)Z
++
++    move-result v0
++
++    if-eqz v0, :cond_0
++
++    invoke-virtual {p0}, Landroid/net/Uri;->getAuthority()Ljava/lang/String;
++
++    move-result-object v0
++
++    invoke-static {p0}, Lcom/alensw/b/j/a;->b(Landroid/net/Uri;)Ljava/lang/String;
++
++    move-result-object v1
++
++    invoke-static {v0, v1}, Lcom/alensw/b/j/a;->c(Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;
++
++    move-result-object p0
++
++    goto :cond_2
++
++    :cond_0
++    invoke-virtual {p0}, Landroid/net/Uri;->getPathSegments()Ljava/util/List;
++
++    move-result-object v0
++
++    invoke-interface {v0}, Ljava/util/List;->size()I
++
++    move-result v1
++
++    const/4 v2, 0x2
++
++    if-lt v1, v2, :cond_2
++
++    const-string v2, "tree"
++
++    const/4 v3, 0x0
++
++    invoke-interface {v0, v3}, Ljava/util/List;->get(I)Ljava/lang/Object;
++
++    move-result-object v3
++
++    invoke-virtual {v2, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
++
++    move-result v2
++
++    if-eqz v2, :cond_2
++
++    const/4 v2, 0x4
++
++    if-lt v1, v2, :cond_1
++
++    const-string v2, "document"
++
++    const/4 v3, 0x2
++
++    invoke-interface {v0, v3}, Ljava/util/List;->get(I)Ljava/lang/Object;
++
++    move-result-object v3
++
++    invoke-virtual {v2, v3}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
++
++    move-result v2
++
++    if-eqz v2, :cond_1
++
++    invoke-static {p0}, Lcom/alensw/b/j/a;->b(Landroid/net/Uri;)Ljava/lang/String;
++
++    move-result-object v1
++
++    goto :goto_0
++
++    :cond_1
++    const/4 v1, 0x1
++
++    invoke-interface {v0, v1}, Ljava/util/List;->get(I)Ljava/lang/Object;
++
++    move-result-object v1
++
++    check-cast v1, Ljava/lang/String;
++
++    :goto_0
++    invoke-virtual {p0}, Landroid/net/Uri;->getAuthority()Ljava/lang/String;
++
++    move-result-object v0
++
++    invoke-static {v0, v1}, Lcom/alensw/b/j/a;->c(Ljava/lang/String;Ljava/lang/String;)Landroid/net/Uri;
++
++    move-result-object p0
++
++    :cond_2
++    :try_end_0
++    .catch Ljava/lang/Throwable; {:try_start_0 .. :try_end_0} :catch_0
++
++    goto :goto_1
++
++    :catch_0
++    move-exception v0
++
++    :cond_3
++    :goto_1
++    return-object p0
++.end method
++
+ .method public static e(Landroid/net/Uri;)[Ljava/lang/String;
+     .locals 7
+ 
+--- decoded/smali/com/alensw/bean/UriFile.smali
++++ decoded/smali/com/alensw/bean/UriFile.smali
+@@ -181,6 +181,10 @@
+ 
+     if-eqz v2, :cond_e
+ 
++    invoke-static/range {p1 .. p1}, Lcom/alensw/b/j/a;->f(Landroid/net/Uri;)Landroid/net/Uri;
++
++    move-result-object p1
++
+     invoke-static {}, Lcom/alensw/PicFolder/QuickApp;->a()Lcom/alensw/PicFolder/QuickApp;
+ 
+     move-result-object v2

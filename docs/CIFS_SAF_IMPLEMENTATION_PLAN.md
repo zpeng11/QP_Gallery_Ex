@@ -10,13 +10,17 @@
 - 后续逐步演进到“与本机目录一致的相册浏览形态”。
 
 ## 当前状态（已完成）
-当前仓库已落地 **阶段 1** 并可编译安装：
+当前仓库已落地 **阶段 1 + 阶段 2** 并可编译安装：
 - 新增 Included/Excluded folders 的 SAF 入口：在开启 `external_files` 时，`Add` 走 `ACTION_OPEN_DOCUMENT_TREE`。
 - 选择目录后执行 `takePersistableUriPermission`，并把 `treeUri.toString()` 写入原目录列表。
 - 兼容修复：扫描器仅把以 `/` 开头的本地路径纳入 include/exclude 匹配，避免 `content://` 条目污染本地扫描。
 - 兼容修复：公共起始目录推导时忽略非本地路径，避免文件浏览默认路径异常。
+- 阶段 2 新增：Included/Excluded 列表支持单击 `content://` 条目直接进入文档目录浏览。
+- 阶段 2 新增：运行时 URI 标准化（`tree/.../document/...` -> `document/...`），并在 `UriFile` 入口统一接入。
 
-对应补丁：`patches/saf-included-folders-stage1.patch`
+对应补丁：
+- `patches/saf-included-folders-stage1.patch`
+- `patches/saf-included-folders-stage2-open-and-uri-normalize.patch`
 
 ## 架构判断
 现有代码分成两条主路径：
@@ -39,16 +43,19 @@
 - Included/Excluded 列表可出现 `content://`。
 - 本地相册扫描数量与性能未明显回退。
 
-### 阶段 2（待实施）
+### 阶段 2（已完成）
 目标：可从设置中的 SAF 目录直接进入“文档目录浏览”。
 - 复用现有 `DocumentFolder`，不新增 `SafRoot/SafFolder` 模型。
-- 在 `Included folders` 与 `Excluded folders` 列表项中，为 `content://` 条目增加“打开”动作。
-- 打开时走 `com.alensw.ui.c.z` 页面渲染，复用 `QueryCursorTask`。
-- 对 `tree/document/document` 形态做 URI 兼容与标准化。
+- 在 `Included folders` 与 `Excluded folders` 列表项中，为 `content://` 条目增加“单击打开”动作。
+- 打开时走 `com.alensw.ui.c.z` 页面渲染，复用 `QueryCursorTask` / `DocumentFolder`。
+- 对 `tree/document/document` 形态做运行时 URI 兼容与标准化，配置存储保持原始 tree 字符串不改写。
+- 在 `UriFile` 内容 URI 入口统一执行标准化，确保递归目录扫描、相册缩略图与图片打开加载链路都走同一 SAF 语义。
 
 验收：
 - 可浏览 CIFS provider 下的子目录与媒体文件。
 - 预览、滑动查看、返回栈可用。
+- 递归目录扫描可继续进入深层子目录。
+- 缩略图加载与图片打开在 `tree` / `document` 两种 URI 输入下行为一致。
 
 ### 阶段 3
 目标：SAF 相册与本地相册在首页统一呈现。
@@ -84,17 +91,26 @@
 - 功能测试：
   - 添加 CIFS URI、重启应用后仍可见。
   - 删除条目、重复添加、取消选择器。
+  - 单击 Included/Excluded 中 `content://` 条目，可直接进入 SAF 文档目录页。
 - 回归测试：
   - 本地 Albums 扫描数量与排序不变。
   - Included/Excluded 纯本地路径行为不变。
+  - 本地路径条目单击不应触发 SAF 打开逻辑。
 - 稳定性测试：
   - provider 离线、鉴权过期、慢网络。
   - Android 11/12/13 上 SAF 授权行为一致性。
+  - `tree/.../document/...` 与 `document/...` 两种 URI 均可稳定打开、缩略图可见、图片可预览。
 
 ## 变更边界
-第一阶段当前修改以下文件：
+阶段 1 修改文件：
 - `decoded/smali/com/alensw/ui/activity/PathListActivity.smali`
 - `decoded/smali/com/alensw/a/v.smali`
 - `decoded/smali/com/alensw/a/o.smali`
+
+阶段 2 修改文件：
+- `decoded/smali/com/alensw/ui/activity/PathListActivity.smali`
+- `decoded/smali/com/alensw/ui/activity/bn.smali`
+- `decoded/smali/com/alensw/b/j/a.smali`
+- `decoded/smali/com/alensw/bean/UriFile.smali`
 
 对应可复用补丁已加入 `patches/series`，可通过既有流水线重放。

@@ -1,5 +1,6 @@
 webp-animated.patch
 saf-included-folders-stage1.patch
+saf-included-folders-stage2-open-and-uri-normalize.patch
 slow-sd-responsive-loading.patch
 loading-indicator-progress.patch
 viewer-scroll-browse.patch
